@@ -116,7 +116,8 @@ figcaption{font-size:14px;color:var(--muted);margin-top:10px}
 /* ---------- about ---------- */
 .quote{position:relative;padding:40px 40px 34px;border-radius:20px;background:linear-gradient(135deg,var(--surface),var(--bg));border:1px solid var(--line)}
 .quote blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(24px,3.2vw,38px);line-height:1.2}
-.quote blockquote::before{content:"\201C";color:var(--accent);font-size:1.4em;line-height:0;vertical-align:-.35em;margin-right:6px}
+.quote blockquote::before{content:"\201C";color:var(--accent);margin-right:2px}
+.quote blockquote::after{content:"\201D";color:var(--accent);margin-left:2px}
 .quote cite{display:block;margin-top:16px;font-style:normal;font-family:var(--mono);font-size:14px;color:var(--accent)}
 .quote p{margin-top:18px;color:#cdd4e4;max-width:60ch}
 
@@ -301,7 +302,6 @@ footer .mono{font-family:var(--mono);font-size:12px}
       </div>
       <figure class="portrait">
         <img src="portrait.jpg" alt="Portrait of Arup Biswas">
-        <figcaption class="cap">Cambridge, MA</figcaption>
       </figure>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · active Brownian particles · move your cursor</span><button class="btn-icon" data-pause>Pause</button></div>
@@ -310,7 +310,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <section>
       <div class="sec-h"><span class="n">00</span><h2>Hello, it's Arup.</h2></div>
       <div class="prose">
-        <p>Thanks a lot for your time to have a look at my website. Currently, I am a research associate at Harvard University in the group of <a href="https://softmath.seas.harvard.edu/" target="_blank" rel="noopener">Prof. L. Mahadevan</a>. My broad research interest lies in non-equilibrium statistical physics. Though it is not that I have many things under my belt to display, I could not resist the temptation to take a dig at what my personal website would look like. Please have a tour of it.</p>
+        <p>Thanks a lot for taking the time to have a look at my website. Currently, I am a research associate at Harvard University in the group of <a href="https://softmath.seas.harvard.edu/" target="_blank" rel="noopener">Prof. L. Mahadevan</a>. My broad research interest lies in non-equilibrium statistical physics. Though it is not that I have many things under my belt to display, I could not resist the temptation to see what my own personal website would look like. Please take a tour.</p>
       </div>
     </section>
     <section>
@@ -340,7 +340,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">ẋ = σ(y−x) · ẏ = x(ρ−z)−y · ż = xy−βz</span>
       <h1>About <em>Me</em></h1>
-      <p class="lede">Non-linear dynamics was one of the courses I enjoyed most. Above: two hundred trajectories that start almost together on the Lorenz attractor and quickly go their separate ways.</p>
+      <p class="lede">Non-linear dynamics was one of the courses I enjoyed most. Above: 220 trajectories that start almost together on the Lorenz attractor and quickly go their separate ways.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · Lorenz system, σ=10, ρ=28, β=8/3</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -353,19 +353,19 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <section>
       <div class="sec-h"><span class="n">01</span><h2>Brief Info</h2></div>
       <div class="prose">
-        <p>Mathematics was the first thing that excited me towards science. Had a plan to do honours in it until I started to appreciate the beauty of it in the application of Physics. Now I feel lucky to have chosen Physics as my part of life. I enjoy learning basic science, solving Physics problems analytically and numerically a lot.</p>
-        <p>My Mother and Father constitute an integral part of my journey. Especially I would credit my Maa (Mother) for making me the person I am today.</p>
+        <p>Mathematics was the first thing that drew me towards science. I had planned to do honours in it, until I started to appreciate its beauty in the applications of Physics. Now I feel lucky to have made Physics a part of my life. I greatly enjoy learning basic science and solving Physics problems, both analytically and numerically.</p>
+        <p>My mother and father are an integral part of my journey. I especially credit my Maa (mother) for making me the person I am today.</p>
       </div>
     </section>
     <section class="grid2">
       <div class="card">
-        <div class="sec-h" style="margin-bottom:16px"><span class="n">02</span><h2 style="font-size:24px">Special topics that I took courses and found interesting</h2></div>
+        <div class="sec-h" style="margin-bottom:16px"><span class="n">02</span><h2 style="font-size:24px">Special topics I took courses on and found interesting</h2></div>
         <div class="chips"><span class="chip">Non-linear dynamics</span><span class="chip">Solid State Physics</span><span class="chip">Stochastic processes</span><span class="chip">Computational Physics</span></div>
       </div>
       <div class="card">
         <div class="sec-h" style="margin-bottom:16px"><span class="n">03</span><h2 style="font-size:24px">Programming knowledge</h2></div>
         <div class="chips"><span class="chip">Python and JAX</span><span class="chip">Mathematica</span><span class="chip">Fortran</span></div>
-        <p class="muted" style="margin-top:14px;font-size:15px">(also learnt basics of C but did not use that much afterwards ;))</p>
+        <p class="muted" style="margin-top:14px;font-size:15px">(I also learnt the basics of C, but did not use it much afterwards ;))</p>
       </div>
     </section>
   </div>
@@ -390,15 +390,15 @@ footer .mono{font-family:var(--mono);font-size:12px}
   </header>
   <div class="wrap">
     <section>
-      <p class="muted">For publications please look into my <a href="https://scholar.google.co.in/citations?user=mDjZQqEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>. Other platforms: <a href="https://www.linkedin.com/in/arup-biswas-652b67218/" target="_blank" rel="noopener">LinkedIn</a>, <a href="https://orcid.org/0009-0007-5611-7709" target="_blank" rel="noopener">ORCID</a>.</p>
+      <p class="muted">For publications, please see my <a href="https://scholar.google.co.in/citations?user=mDjZQqEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> profile. Other platforms: <a href="https://www.linkedin.com/in/arup-biswas-652b67218/" target="_blank" rel="noopener">LinkedIn</a>, <a href="https://orcid.org/0009-0007-5611-7709" target="_blank" rel="noopener">ORCID</a>.</p>
     </section>
     <section>
       <div class="sec-h"><span class="n">01</span><h2>What is a stochastic process? Why learn it?</h2></div>
       <div class="split">
         <div class="prose">
-          <p>This has been best explained by Obama in the video on the right side/below. Simply put, it is a random process. There are plenty of stochastic processes that we encounter in our day-to-day life. For instance, when you are searching randomly for the lost smartphone/key, tossing a coin to decide who will go first, kicking the football randomly without seeing if there is anyone to receive it, etc.</p>
-          <p>I believe every process we can imagine is random on a certain timescale. For example, you go to lunch at 1 P.M. every day. But if I ask, at what minutes and what seconds exactly, that has to be random. Naively, one might not be bothered so much by such randomness since, unlike Newton's laws, no prediction could be made to exactly determine the process's future. However, one can always predict the future outcome of the process on a probabilistic level with the help of the theory of stochastic processes.</p>
-          <p>For e.g., no one can predict the stock market's movement, yet physicists, economists, and mathematicians greatly rely on the theory of stochastic processes to predict the market's nature. Biological processes such as DNA assembly and RNA transcription have the theory of stochastic processes in their core. Furthermore, the recent development of artificial intelligence (AI) is nothing but a niche application of the theory of stochastic processes. Thus, we need to have an in-depth understanding of stochastic processes.</p>
+          <p>This is best explained by Obama in the video on the right (below, on a phone). Simply put, it is a random process. There are plenty of stochastic processes that we encounter in our day-to-day life. For instance, when you are searching randomly for a lost smartphone or key, tossing a coin to decide who will go first, kicking the football randomly without seeing if there is anyone to receive it, etc.</p>
+          <p>I believe every process we can imagine is random on a certain timescale. For example, you go to lunch at 1 P.M. every day. But if you ask at exactly which minute and second, that has to be random. Naively, one might not be bothered so much by such randomness since, unlike with Newton's laws, no prediction can determine the process's future exactly. However, one can always predict the future outcome of the process on a probabilistic level with the help of the theory of stochastic processes.</p>
+          <p>For example, no one can predict the stock market's movement, yet physicists, economists, and mathematicians greatly rely on the theory of stochastic processes to predict the market's nature. Biological processes such as DNA assembly and RNA transcription have the theory of stochastic processes at their core. Furthermore, the recent development of artificial intelligence (AI) is nothing but a niche application of the theory of stochastic processes. Thus, we need to have an in-depth understanding of stochastic processes.</p>
         </div>
         <figure><div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/_6wK-4pDVVg" title="Stochastic process, as explained by Obama" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><figcaption>“Stochastic process”, as explained by Obama</figcaption></figure>
       </div>
@@ -408,7 +408,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
       <div class="prose">
         <p>Imagine searching for a lost item: if you wander aimlessly for too long without success, your best strategy is often to return to your starting point and begin anew. This simple yet profound concept, stochastic resetting, transforms how we understand search processes across nature and technology. While randomly exploring a space guarantees you will eventually find a target, random walks are notoriously prone to drifting off into vast, empty regions, leading to drastically inefficient search times. Resetting acts as a powerful optimization tool that cuts down these times by preventing infinite wandering.</p>
         <p>In biology and ecology, this framework explains how proteins efficiently locate specific DNA sequences or how animals optimize foraging in unpredictable landscapes. In chemistry, resetting mechanisms can govern reaction rates and catalytic processes. Beyond the natural world, computer scientists apply these principles to streamline randomized search algorithms, while queuing theory uses them to manage network delays by intentionally restarting stalled tasks. By introducing a "restart" button to random motion, we uncover a universal mathematical mechanism that turns fundamentally inefficient wandering into highly optimized exploration.</p>
-        <p>This visualization below tracks a swarm of particles undergoing random 2D diffusion, where each particle occasionally triggers a return to the origin. By adjusting the sliders, you can observe in real-time how the interplay between the diffusion constant, resetting rate, and return speed shapes the steady-state distribution of the system.</p>
+        <p>The visualization below tracks a swarm of particles undergoing random 2D diffusion, where each particle occasionally triggers a return to the origin. By adjusting the sliders, you can observe in real time how the interplay between the diffusion constant, resetting rate, and return speed shapes the steady-state distribution of the system.</p>
       </div>
       <div class="lab" style="margin-top:28px">
         <div class="lab-top">
@@ -470,7 +470,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
             <span class="k">* Previously Fulbright-Nehru doctoral researcher</span>
             <span><a href="https://seas.harvard.edu/" target="_blank" rel="noopener">Harvard University</a>, Cambridge, USA</span>
             <span><span class="k">Host:</span> <a href="https://www.physics.harvard.edu/people/facpages/mahadevan" target="_blank" rel="noopener">Prof. L. Mahadevan</a></span>
-            <span><span class="k">Theme of research:</span> Navigation and optimal control, Error correction in biochemical processes</span>
+            <span><span class="k">Theme of research:</span> Navigation and optimal control; error correction in biochemical processes</span>
           </div>
         </div>
         <div class="logo"><img src="logo-harvard.png" alt="Harvard University logo"></div>
@@ -482,13 +482,13 @@ footer .mono{font-family:var(--mono);font-size:12px}
           <div class="meta">
             <span><a href="http://www.imsc.res.in/" target="_blank" rel="noopener">The Institute of Mathematical Sciences</a>, Chennai, Tamil Nadu</span>
             <span><span class="k">Supervisor:</span> <a href="https://sites.google.com/view/arnab-pal/home" target="_blank" rel="noopener">Dr. Arnab Pal</a></span>
-            <span><span class="k">Theme of research:</span> Non-equilibrium statistical mechanics, First-passage processes</span>
+            <span><span class="k">Theme of research:</span> Non-equilibrium statistical mechanics; first-passage processes</span>
           </div>
         </div>
         <div class="logo"><img src="logo-imsc.png" alt="The Institute of Mathematical Sciences logo"></div>
       </article>
       <article class="tl gap">
-        <div><div class="yr">2020 – 2021</div><h3>Jobless (due to Covid)</h3></div>
+        <div><div class="yr">2020 – 2021</div><h3>Jobless (due to COVID-19)</h3></div>
       </article>
       <article class="tl">
         <div>
@@ -501,7 +501,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
       <article class="tl">
         <div>
           <div class="yr">2018</div>
-          <h3>B.Sc Physics</h3>
+          <h3>B.Sc. Physics</h3>
           <div class="meta"><span>1st class with distinction</span><span><a href="http://www.jaduniv.edu.in/" target="_blank" rel="noopener">Jadavpur University</a>, Kolkata, West Bengal</span></div>
         </div>
         <div class="logo"><img src="logo-ju-bsc.png" alt="Jadavpur University logo"></div>
@@ -541,10 +541,10 @@ footer .mono{font-family:var(--mono);font-size:12px}
   <div class="wrap">
     <div class="awards">
       <article class="aw"><div class="when">2025<small>Fellowship</small></div><div><h3><a href="https://www.usief.org.in/home-institution-india/the-institute-of-mathematical-sciences/" target="_blank" rel="noopener">Fulbright-Nehru doctoral research fellowship</a></h3><p>Harvard University, Cambridge, USA</p></div></article>
-      <article class="aw"><div class="when">2025<small>Award</small></div><div><h3><a href="https://www.kvrss.org/research-awards.html" target="_blank" rel="noopener">KVRSS research award</a></h3><p>3rd position in a nationwide programme for my research work (write up + talk)</p></div></article>
-      <article class="aw"><div class="when">2023<small>Prize</small></div><div><h3><a href="https://inyas.in/2024/05/19/winners-of-saransh-23-thesis-presentation-competition/" target="_blank" rel="noopener">INYAS Saransh</a></h3><p>3rd prize in a national competition for presenting my research topic in simple language (<a href="https://www.youtube.com/watch?v=rFnfHsHMV8Y" data-view="https://www.youtube-nocookie.com/embed/rFnfHsHMV8Y?autoplay=1" data-kind="video" data-title="INYAS Saransh 2023 presentation">Link to my presentation</a>)</p></div></article>
-      <article class="aw"><div class="when">B.Sc.<small>M.Sc. · Ph.D.</small></div><div><h3>INSPIRE scholarship</h3><p>INSPIRE scholarship at B.Sc. and M.Sc. for being in top 1% in board exams; INSPIRE fellowship offer letter (not availed) for Ph.D. for having good academic record in B.Sc and M.Sc.</p></div></article>
-      <article class="aw"><div class="when">2021<small>National exams</small></div><div><h3>National exams</h3>
+      <article class="aw"><div class="when">2025<small>Award</small></div><div><h3><a href="https://www.kvrss.org/research-awards.html" target="_blank" rel="noopener">KVRSS research award</a></h3><p>3rd position in a nationwide programme for my research work (write-up + talk)</p></div></article>
+      <article class="aw"><div class="when">2023<small>Prize</small></div><div><h3><a href="https://inyas.in/2024/05/19/winners-of-saransh-23-thesis-presentation-competition/" target="_blank" rel="noopener">INYAS Saransh</a></h3><p>3rd prize in a national competition for presenting my research topic in simple language (<a href="https://www.youtube.com/watch?v=rFnfHsHMV8Y" data-view="https://www.youtube-nocookie.com/embed/rFnfHsHMV8Y?autoplay=1" data-kind="video" data-title="INYAS Saransh 2023 presentation">watch my presentation</a>)</p></div></article>
+      <article class="aw"><div class="when">B.Sc.<small style="text-transform:none">M.Sc. · Ph.D.</small></div><div><h3>INSPIRE scholarship</h3><p>INSPIRE scholarship during B.Sc. and M.Sc. for being in the top 1% in board exams; INSPIRE fellowship offer (not availed) for Ph.D. for a good academic record in B.Sc. and M.Sc.</p></div></article>
+      <article class="aw"><div class="when">2021<small>Ranks</small></div><div><h3>National exams</h3>
         <div class="ranks"><div class="rank"><b>AIR 31</b><span>GATE 2021</span></div><div class="rank"><b>AIR 21</b><span>JEST 2021</span></div><div class="rank"><b>AIR 115</b><span>CSIR NET JRF 2021</span></div></div></div></article>
     </div>
   </div>
@@ -568,12 +568,12 @@ footer .mono{font-family:var(--mono);font-size:12px}
   </header>
   <div class="wrap">
     <div class="arch">
-      <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" data-view="https://www.youtube-nocookie.com/embed/4c321m-Vri8?autoplay=1" data-kind="video" data-title="Evolution of predators in a diffusive predator–prey model"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator-prey model also known as the Lotka-Volterra model (play in 2X speed). This video has been uploaded in my Youtube channel AB Physics.</p><span class="go">Watch here ▸</span></a>
+      <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" data-view="https://www.youtube-nocookie.com/embed/4c321m-Vri8?autoplay=1" data-kind="video" data-title="Evolution of predators in a diffusive predator–prey model"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator–prey model, also known as the Lotka–Volterra model (best watched at 2× speed). This video has been uploaded to my YouTube channel, AB Physics.</p><span class="go">Watch here ▸</span></a>
       <a class="ar" href="https://www.youtube.com/c/ABPhysics2701" target="_blank" rel="noopener"><span class="ty">Channel · YouTube</span><h3>AB Physics</h3><p>www.youtube.com/c/ABPhysics2701</p><span class="go">Visit the channel ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" data-view="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/preview" data-kind="doc" data-title="Bethe_Ansatz_Presentation (5).pdf"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on Bethe Ansatz</p><span class="go">View Bethe_Ansatz_Presentation (5).pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" data-view="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/preview" data-kind="doc" data-title="Bethe_Ansatz.pdf"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on Bethe Ansatz</p><span class="go">View Bethe_Ansatz.pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" data-view="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/preview" data-kind="doc" data-title="Arup Assignment 4.pdf"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite size scaling</h3><p>Simulation of 2D Ising model with finite size scaling in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">View Arup Assignment 4.pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" data-view="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/preview" data-kind="doc" data-title="Animation.pdf"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes for projectile, 2D- random walk of a particle in Python</p><span class="go">View Animation.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" data-view="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/preview" data-kind="doc" data-title="Bethe_Ansatz_Presentation (5).pdf"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on the Bethe Ansatz</p><span class="go">View Bethe_Ansatz_Presentation (5).pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" data-view="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/preview" data-kind="doc" data-title="Bethe_Ansatz.pdf"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on the Bethe Ansatz</p><span class="go">View Bethe_Ansatz.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" data-view="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/preview" data-kind="doc" data-title="Arup Assignment 4.pdf"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite-size scaling</h3><p>Simulation of the 2D Ising model with finite-size scaling, in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">View Arup Assignment 4.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" data-view="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/preview" data-kind="doc" data-title="Animation.pdf"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes, in Python, for a projectile and for a 2D random walk of a particle</p><span class="go">View Animation.pdf ▸</span></a>
     </div>
   </div>
 </section>
@@ -621,7 +621,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
   <div class="wrap">
     <div class="contact">
       <div class="ct"><div class="k">Current Address</div><address>18 Sexton Street, Watertown,<br>Massachusetts, USA, 02472</address></div>
-      <div class="ct"><div class="k">Permanent Address</div><address>1 no cabin road, Golghar, Jagaddal,<br>North 24 Parganas, West Bengal, PIN 743125</address></div>
+      <div class="ct"><div class="k">Permanent Address</div><address>1 No. Cabin Road, Golghar, Jagaddal,<br>North 24 Parganas, West Bengal, PIN 743125</address></div>
       <div class="ct" style="grid-column:1/-1"><div class="k">E-mail</div>
         <div class="mails">
           <div class="mail"><a href="mailto:arupb2701@gmail.com">arupb2701@gmail.com</a><button data-copy="arupb2701@gmail.com">Copy</button></div>
@@ -838,25 +838,25 @@ window.addEventListener('hashchange',route); route();
 
 /* ======================= GALLERY ======================= */
 const photos=[
- ['gallery-04',"Maha's group with the Director of Concord Field Station, Harvard, Prof. Andrew Biewener"],
- ['gallery-05',"At the iconic Harvard yard"],
+ ['gallery-04',"Maha's group with Prof. Andrew Biewener, Director of the Concord Field Station, Harvard"],
+ ['gallery-05',"At the iconic Harvard Yard"],
  ['gallery-06',"With group members from Maha's lab at Harvard"],
- ['gallery-07',"With (Late) Sir R. Chidambaram (spearhead of nuclear power of India) and Sir V. Ravindran (Director of IMSc)"],
- ['gallery-08',"With my PhD guide cum senior Arnab (the middle) and other colleagues."],
+ ['gallery-07',"With the late Sir R. Chidambaram (spearhead of India's nuclear power programme) and Sir V. Ravindran (Director of IMSc)"],
+ ['gallery-08',"With my PhD guide and senior, Arnab (middle), and other colleagues"],
  ['gallery-09',"My Mother (Maa), to whom I owe my entire life and its values."],
- ['gallery-10',"The most precious gift that I got from the world - my wife ;)"],
+ ['gallery-10',"The most precious gift the world has given me: my wife ;)"],
  ['gallery-11',"Partner in crime from my mess at Jadavpur"],
- ['gallery-12',"This poor guys are my batchmates from IMSc"],
- ['gallery-13',"Jadavpur batchmates - Indian Govt is in unsafe hands of some of these guys."],
+ ['gallery-12',"These poor guys are my batchmates from IMSc"],
+ ['gallery-13',"Jadavpur batchmates – the Indian government is in the unsafe hands of some of these guys"],
  ['gallery-14',"Institute trip to Ooty (2022)"],
  ['gallery-15',"Institute trip to Chikmagalur (2023)"],
  ['gallery-16',"Institute trip to Munnar (2025)"],
  ['gallery-17',"A random click"],
- ['gallery-18',"Tree plantation at Republic day at IMSc"],
- ['gallery-19',"My lovely pets (one of them is no more but not from my heart)"],
+ ['gallery-18',"Tree plantation on Republic Day at IMSc"],
+ ['gallery-19',"My lovely pets (one of them is no more, but never gone from my heart)"],
  ['gallery-20',"Science at the Sabha @IMSc"],
- ['gallery-21',"Short trip to Mysore with guys from Bangalore school of statistical physics 2023"],
- ['gallery-22',"Open day @IMSc"]
+ ['gallery-21',"Short trip to Mysore with friends from the Bangalore School on Statistical Physics (2023)"],
+ ['gallery-22',"Open Day @IMSc"]
 ];
 const ms=document.getElementById('masonry');
 if(ms){ ms.innerHTML=photos.map(([f,c])=>`<figure class="ph"><button data-lb="${f}.jpg" data-cap="${c.replace(/"/g,'&quot;')}"><img src="${f}.jpg" alt="${c.replace(/"/g,'&quot;')}" loading="lazy"></button><figcaption>${c}</figcaption></figure>`).join(''); }
