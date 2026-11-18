@@ -7,7 +7,7 @@
 <meta name="description" content="Arup Biswas — non-equilibrium statistical physics, stochastic processes, Harvard University.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Layout idea: every page opens on a live simulation "plate", content sits below on an ink lab-notebook ground. */
@@ -19,7 +19,7 @@
   --muted:#98a3bd;
   --accent:#f5a83c;
   --accent-ink:#1b1204;
-  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --display:"Source Serif 4", "Iowan Old Style", Georgia, serif;
   --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
   color-scheme:dark;
@@ -47,7 +47,7 @@ p{margin:0}
 .nav-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;white-space:nowrap}
 .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
-.brand b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.2px}
+.brand b{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:.1px}
 .links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
 .links::-webkit-scrollbar{display:none}
 .links a{color:var(--muted);text-decoration:none;font-size:14px;padding:7px 11px;border-radius:999px;white-space:nowrap}
@@ -61,7 +61,7 @@ p{margin:0}
 .hero-in > *{pointer-events:auto}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,14,24,.86) 0%, rgba(10,14,24,.45) 42%, rgba(10,14,24,0) 70%);pointer-events:none}
 .eq{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.3px;display:inline-flex;gap:10px;align-items:center;padding:5px 12px;border:1px solid color-mix(in srgb,var(--accent) 40%, transparent);border-radius:999px;background:rgba(10,14,24,.6)}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,8vw,104px);line-height:.98;margin-top:18px;letter-spacing:-.5px}
+.hero h1{font-family:var(--display);font-weight:600;font-size:clamp(38px,5.6vw,72px);line-height:1.06;margin-top:18px;letter-spacing:-.6px}
 .hero h1 em{color:var(--accent);font-style:italic}
 .hero .lede{max-width:56ch;color:#cdd4e4;margin-top:16px;font-size:18px}
 .simbar{position:absolute;right:16px;bottom:14px;display:flex;gap:10px;align-items:center;z-index:2;font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -76,7 +76,7 @@ p{margin:0}
 .wrap{max-width:1180px;margin:0 auto;padding:64px 20px 88px;display:grid;gap:64px}
 .sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
 .sec-h .n{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--line);padding:2px 8px;border-radius:6px}
-.sec-h h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4vw,44px);line-height:1.05}
+.sec-h h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3vw,34px);line-height:1.15}
 .prose{max-width:68ch;color:#d5dbe8}
 .prose p + p{margin-top:14px}
 .muted{color:var(--muted)}
@@ -105,17 +105,17 @@ figcaption{font-size:14px;color:var(--muted);margin-top:10px}
 .tile{display:block;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;position:relative;overflow:hidden;transition:transform .2s, border-color .2s}
 .tile:hover{transform:translateY(-3px);border-color:var(--tc)}
 .tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tc)}
-.tile .t{font-family:var(--display);font-size:28px;line-height:1.1}
+.tile .t{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.2}
 .tile .d{font-size:14px;color:var(--muted);margin-top:6px}
 .tile .k{font-family:var(--mono);font-size:11px;color:var(--tc);margin-top:14px;letter-spacing:.4px;text-transform:uppercase}
 .place{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:260px;display:flex;align-items:flex-end}
 .place img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.7)}
 .place .over{position:relative;padding:28px;max-width:60ch;background:linear-gradient(0deg,rgba(10,14,24,.92),rgba(10,14,24,0))}
-.place .over p{font-family:var(--display);font-size:clamp(22px,2.6vw,30px);line-height:1.25}
+.place .over p{font-family:var(--display);font-style:italic;font-size:clamp(19px,2vw,24px);line-height:1.35}
 
 /* ---------- about ---------- */
 .quote{position:relative;padding:40px 40px 34px;border-radius:20px;background:linear-gradient(135deg,var(--surface),var(--bg));border:1px solid var(--line)}
-.quote blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(30px,4.2vw,52px);line-height:1.1}
+.quote blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(24px,3.2vw,38px);line-height:1.2}
 .quote blockquote::before{content:"\201C";color:var(--accent);font-size:1.4em;line-height:0;vertical-align:-.35em;margin-right:6px}
 .quote cite{display:block;margin-top:16px;font-style:normal;font-family:var(--mono);font-size:14px;color:var(--accent)}
 .quote p{margin-top:18px;color:#cdd4e4;max-width:60ch}
@@ -126,7 +126,7 @@ figcaption{font-size:14px;color:var(--muted);margin-top:10px}
 .yt .play{width:58px;height:58px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
 .yt .play svg{width:22px;height:22px;fill:var(--accent-ink);margin-left:3px}
 .yt .lbl{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.yt .ttl{font-family:var(--display);font-size:28px;line-height:1.1}
+.yt .ttl{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.25}
 .split{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:start}
 .lab{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
 .lab-top{display:grid;grid-template-columns:1.5fr 1fr;min-height:380px}
@@ -154,19 +154,19 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .tl::before{content:"";position:absolute;left:-29px;top:30px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
 .tl.now::before{background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 22%, transparent)}
 .tl .yr{font-family:var(--mono);font-size:13px;color:var(--accent)}
-.tl h3{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;margin-top:4px}
+.tl h3{font-family:var(--display);font-weight:600;font-size:23px;line-height:1.25;margin-top:4px}
 .tl .meta{margin-top:8px;display:grid;gap:2px;font-size:15.5px;color:#cfd6e5}
 .tl .meta .k{color:var(--muted)}
 .tl .logo{width:112px;height:112px;border-radius:16px;background:#f2f4f8;display:grid;place-items:center;overflow:hidden}
 .tl .logo img{width:88%;height:88%;object-fit:contain}
 .tl .logo.photo img{width:100%;height:100%;object-fit:cover}
 .tl.gap{grid-template-columns:1fr;border-style:dashed;background:transparent}
-.tl.gap h3{font-size:24px;color:var(--muted)}
+.tl.gap h3{font-size:20px;color:var(--muted)}
 
 /* ---------- awards ---------- */
 .awards{display:grid;gap:16px}
 .aw{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
-.aw .when{font-family:var(--display);font-size:44px;line-height:1;color:var(--accent)}
+.aw .when{font-family:var(--display);font-weight:600;font-size:32px;line-height:1;color:var(--accent)}
 .aw .when small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-top:6px}
 .aw h3{font-size:19px;font-weight:600;line-height:1.35}
 .aw p{color:#cfd6e5;margin-top:6px}
@@ -180,7 +180,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .ar{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .2s, transform .2s}
 .ar:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
 .ar .ty{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
-.ar h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.15}
+.ar h3{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.3}
 .ar p{color:var(--muted);font-size:15px}
 .ar .go{margin-top:auto;font-size:14px;color:var(--accent)}
 .ising-note{font-family:var(--mono);font-size:13px;color:var(--muted)}
@@ -212,6 +212,19 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .mail button{font:inherit;font-size:12px;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:8px;padding:4px 10px;cursor:pointer;flex-shrink:0}
 .mail button:hover{border-color:var(--accent)}
 
+/* ---------- in-site viewer ---------- */
+.viewer{position:fixed;inset:0;z-index:60;background:rgba(5,7,12,.9);display:none;align-items:center;justify-content:center;padding:20px}
+.viewer.open{display:flex}
+.vbox{width:min(1100px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;max-height:100%}
+.vbar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.vbar b{font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vbar a{font-size:13px;color:var(--muted);white-space:nowrap}
+.vframe{position:relative;background:#000}
+.vframe.video{aspect-ratio:16/9}
+.vframe.doc{height:min(82vh,1100px);background:#f4f5f7}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.embed{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#000}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer .in{max-width:1180px;margin:0 auto;padding:26px 20px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
 footer .mono{font-family:var(--mono);font-size:12px}
@@ -280,7 +293,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
         <img class="sig" src="signature.png" alt="অরূপ বিশ্বাস — Arup Biswas written in Bengali">
         <div class="role"><span>Research associate, Harvard University</span><span>Group of Prof. L. Mahadevan</span><span>Non-equilibrium statistical physics</span></div>
         <div class="btns">
-          <a class="btn primary" href="https://docs.google.com/document/d/1Wxi5dEAwEr4SqzUOg2q5hxWupTHnZrvox1XjgCVetqI/edit?usp=sharing" target="_blank" rel="noopener">
+          <a class="btn primary" href="https://docs.google.com/document/d/1Wxi5dEAwEr4SqzUOg2q5hxWupTHnZrvox1XjgCVetqI/edit?usp=sharing" data-view="https://docs.google.com/document/d/1Wxi5dEAwEr4SqzUOg2q5hxWupTHnZrvox1XjgCVetqI/preview" data-kind="doc" data-title="CV · Arup Biswas">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>CV</a>
           <a class="btn" href="#research">Research</a>
           <a class="btn" href="#contact">Contact</a>
@@ -346,11 +359,11 @@ footer .mono{font-family:var(--mono);font-size:12px}
     </section>
     <section class="grid2">
       <div class="card">
-        <div class="sec-h" style="margin-bottom:16px"><span class="n">02</span><h2 style="font-size:30px">Special topics that I took courses and found interesting</h2></div>
+        <div class="sec-h" style="margin-bottom:16px"><span class="n">02</span><h2 style="font-size:24px">Special topics that I took courses and found interesting</h2></div>
         <div class="chips"><span class="chip">Non-linear dynamics</span><span class="chip">Solid State Physics</span><span class="chip">Stochastic processes</span><span class="chip">Computational Physics</span></div>
       </div>
       <div class="card">
-        <div class="sec-h" style="margin-bottom:16px"><span class="n">03</span><h2 style="font-size:30px">Programming knowledge</h2></div>
+        <div class="sec-h" style="margin-bottom:16px"><span class="n">03</span><h2 style="font-size:24px">Programming knowledge</h2></div>
         <div class="chips"><span class="chip">Python and JAX</span><span class="chip">Mathematica</span><span class="chip">Fortran</span></div>
         <p class="muted" style="margin-top:14px;font-size:15px">(also learnt basics of C but did not use that much afterwards ;))</p>
       </div>
@@ -387,10 +400,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
           <p>I believe every process we can imagine is random on a certain timescale. For example, you go to lunch at 1 P.M. every day. But if I ask, at what minutes and what seconds exactly, that has to be random. Naively, one might not be bothered so much by such randomness since, unlike Newton's laws, no prediction could be made to exactly determine the process's future. However, one can always predict the future outcome of the process on a probabilistic level with the help of the theory of stochastic processes.</p>
           <p>For e.g., no one can predict the stock market's movement, yet physicists, economists, and mathematicians greatly rely on the theory of stochastic processes to predict the market's nature. Biological processes such as DNA assembly and RNA transcription have the theory of stochastic processes in their core. Furthermore, the recent development of artificial intelligence (AI) is nothing but a niche application of the theory of stochastic processes. Thus, we need to have an in-depth understanding of stochastic processes.</p>
         </div>
-        <a class="yt" href="https://www.youtube.com/watch?v=_6wK-4pDVVg" target="_blank" rel="noopener">
-          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l14 8-14 8z"/></svg></span>
-          <span><span class="lbl">YouTube · opens in a new tab</span><br><span class="ttl">“Stochastic process”, as explained by Obama</span></span>
-        </a>
+        <figure><div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/_6wK-4pDVVg" title="Stochastic process, as explained by Obama" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><figcaption>“Stochastic process”, as explained by Obama</figcaption></figure>
       </div>
     </section>
     <section>
@@ -532,7 +542,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="awards">
       <article class="aw"><div class="when">2025<small>Fellowship</small></div><div><h3><a href="https://www.usief.org.in/home-institution-india/the-institute-of-mathematical-sciences/" target="_blank" rel="noopener">Fulbright-Nehru doctoral research fellowship</a></h3><p>Harvard University, Cambridge, USA</p></div></article>
       <article class="aw"><div class="when">2025<small>Award</small></div><div><h3><a href="https://www.kvrss.org/research-awards.html" target="_blank" rel="noopener">KVRSS research award</a></h3><p>3rd position in a nationwide programme for my research work (write up + talk)</p></div></article>
-      <article class="aw"><div class="when">2023<small>Prize</small></div><div><h3><a href="https://inyas.in/2024/05/19/winners-of-saransh-23-thesis-presentation-competition/" target="_blank" rel="noopener">INYAS Saransh</a></h3><p>3rd prize in a national competition for presenting my research topic in simple language (<a href="https://www.youtube.com/watch?v=rFnfHsHMV8Y" target="_blank" rel="noopener">Link to my presentation</a>)</p></div></article>
+      <article class="aw"><div class="when">2023<small>Prize</small></div><div><h3><a href="https://inyas.in/2024/05/19/winners-of-saransh-23-thesis-presentation-competition/" target="_blank" rel="noopener">INYAS Saransh</a></h3><p>3rd prize in a national competition for presenting my research topic in simple language (<a href="https://www.youtube.com/watch?v=rFnfHsHMV8Y" data-view="https://www.youtube-nocookie.com/embed/rFnfHsHMV8Y?autoplay=1" data-kind="video" data-title="INYAS Saransh 2023 presentation">Link to my presentation</a>)</p></div></article>
       <article class="aw"><div class="when">B.Sc.<small>M.Sc. · Ph.D.</small></div><div><h3>INSPIRE scholarship</h3><p>INSPIRE scholarship at B.Sc. and M.Sc. for being in top 1% in board exams; INSPIRE fellowship offer letter (not availed) for Ph.D. for having good academic record in B.Sc and M.Sc.</p></div></article>
       <article class="aw"><div class="when">2021<small>National exams</small></div><div><h3>National exams</h3>
         <div class="ranks"><div class="rank"><b>AIR 31</b><span>GATE 2021</span></div><div class="rank"><b>AIR 21</b><span>JEST 2021</span></div><div class="rank"><b>AIR 115</b><span>CSIR NET JRF 2021</span></div></div></div></article>
@@ -558,12 +568,12 @@ footer .mono{font-family:var(--mono);font-size:12px}
   </header>
   <div class="wrap">
     <div class="arch">
-      <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" target="_blank" rel="noopener"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator-prey model also known as the Lotka-Volterra model (play in 2X speed). This video has been uploaded in my Youtube channel AB Physics.</p><span class="go">Watch the video ↗</span></a>
+      <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" data-view="https://www.youtube-nocookie.com/embed/4c321m-Vri8?autoplay=1" data-kind="video" data-title="Evolution of predators in a diffusive predator–prey model"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator-prey model also known as the Lotka-Volterra model (play in 2X speed). This video has been uploaded in my Youtube channel AB Physics.</p><span class="go">Watch here ▸</span></a>
       <a class="ar" href="https://www.youtube.com/c/ABPhysics2701" target="_blank" rel="noopener"><span class="ty">Channel · YouTube</span><h3>AB Physics</h3><p>www.youtube.com/c/ABPhysics2701</p><span class="go">Visit the channel ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" target="_blank" rel="noopener"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on Bethe Ansatz</p><span class="go">Open Bethe_Ansatz_Presentation (5).pdf ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" target="_blank" rel="noopener"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on Bethe Ansatz</p><span class="go">Open Bethe_Ansatz.pdf ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" target="_blank" rel="noopener"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite size scaling</h3><p>Simulation of 2D Ising model with finite size scaling in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">Open Arup Assignment 4.pdf ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" target="_blank" rel="noopener"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes for projectile, 2D- random walk of a particle in Python</p><span class="go">Open Animation.pdf ↗</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" data-view="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/preview" data-kind="doc" data-title="Bethe_Ansatz_Presentation (5).pdf"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on Bethe Ansatz</p><span class="go">View Bethe_Ansatz_Presentation (5).pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" data-view="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/preview" data-kind="doc" data-title="Bethe_Ansatz.pdf"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on Bethe Ansatz</p><span class="go">View Bethe_Ansatz.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" data-view="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/preview" data-kind="doc" data-title="Arup Assignment 4.pdf"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite size scaling</h3><p>Simulation of 2D Ising model with finite size scaling in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">View Arup Assignment 4.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" data-view="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/preview" data-kind="doc" data-title="Animation.pdf"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes for projectile, 2D- random walk of a particle in Python</p><span class="go">View Animation.pdf ▸</span></a>
     </div>
   </div>
 </section>
@@ -627,6 +637,12 @@ footer .mono{font-family:var(--mono);font-size:12px}
 
 <footer><div class="in"><span>© Arup Biswas</span><span class="mono">All simulations run live in your browser · stochastic, so no two visits look the same</span></div></footer>
 
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title">
+  <div class="vbox">
+    <div class="vbar"><b id="v-title"></b><a id="v-ext" href="#" target="_blank" rel="noopener">Open in new tab ↗</a><button class="btn-icon" id="v-close">Close</button></div>
+    <div class="vframe" id="v-frame"></div>
+  </div>
+</div>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="btn-icon x" id="lb-close">Close</button>
   <img id="lb-img" alt="">
@@ -850,6 +866,16 @@ function closeLb(){ lb.classList.remove('open'); if(lastFocus) lastFocus.focus()
 document.getElementById('lb-close').addEventListener('click',closeLb);
 lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&lb.classList.contains('open')) closeLb(); });
+
+/* ======================= IN-SITE VIEWER ======================= */
+const vw=document.getElementById('viewer'), vf=document.getElementById('v-frame'), vt=document.getElementById('v-title'), ve=document.getElementById('v-ext'); let vLast=null;
+document.addEventListener('click',e=>{ const a=e.target.closest('[data-view]'); if(!a) return; e.preventDefault(); vLast=a;
+  vf.className='vframe '+(a.dataset.kind||'doc'); vf.innerHTML=''; const f=document.createElement('iframe'); f.src=a.dataset.view; f.title=a.dataset.title||''; f.allow='autoplay; encrypted-media; fullscreen; picture-in-picture'; f.allowFullscreen=true; vf.appendChild(f);
+  vt.textContent=a.dataset.title||''; ve.href=a.getAttribute('href'); vw.classList.add('open'); document.getElementById('v-close').focus(); });
+function closeV(){ vw.classList.remove('open'); vf.innerHTML=''; if(vLast) vLast.focus(); }
+document.getElementById('v-close').addEventListener('click',closeV);
+vw.addEventListener('click',e=>{ if(e.target===vw) closeV(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&vw.classList.contains('open')) closeV(); });
 
 /* ======================= COPY ======================= */
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{ try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied'; } catch(err){ b.textContent='Select & copy'; } setTimeout(()=>b.textContent='Copy',1600); }));
