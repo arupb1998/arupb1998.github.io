@@ -60,7 +60,9 @@ p{margin:0}
 .hero-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:84px 20px 72px;pointer-events:none}
 .hero-in > *{pointer-events:auto}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,14,24,.86) 0%, rgba(10,14,24,.45) 42%, rgba(10,14,24,0) 70%);pointer-events:none}
-.eq{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.3px;display:inline-flex;gap:10px;align-items:center;padding:5px 12px;border:1px solid color-mix(in srgb,var(--accent) 40%, transparent);border-radius:999px;background:rgba(10,14,24,.6)}
+.eq{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.3px;display:inline-block;line-height:1.5;padding:5px 12px;border:1px solid color-mix(in srgb,var(--accent) 40%, transparent);border-radius:999px;background:rgba(10,14,24,.6)}
+.eq .nw{white-space:nowrap}
+.eq sub{font-size:.72em;vertical-align:-.3em;line-height:0;letter-spacing:0}
 .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(38px,5.6vw,72px);line-height:1.06;margin-top:18px;letter-spacing:-.6px}
 .hero h1 em{color:var(--accent);font-style:italic}
 .hero .lede{max-width:56ch;color:#cdd4e4;margin-top:16px;font-size:18px}
@@ -250,7 +252,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
   .aw{grid-template-columns:1fr;gap:8px}
   .contact{grid-template-columns:1fr}
   .hero{min-height:380px}
-  .eq{font-size:11.5px;flex-wrap:wrap;border-radius:12px}
+  .eq{font-size:11.5px;border-radius:12px}
   .simbar .tag{display:none}
   .sketches{grid-template-columns:1fr 1fr}
   .quote{padding:28px 22px}
@@ -289,7 +291,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-shade"></div>
     <div class="hero-in">
       <div>
-        <span class="eq">dr/dt = v₀ n̂(θ) + √(2D) ξ(t) &nbsp;·&nbsp; dθ/dt = √(2D<sub>r</sub>) η(t)</span>
+        <span class="eq"><span class="nw">dr/dt = v₀ n̂(θ) + √(2D) ξ(t)</span> &nbsp;·&nbsp; <span class="nw">dθ/dt = √(2D<sub>r</sub>) η(t)</span></span>
         <h1>Arup <em>Biswas</em></h1>
         <img class="sig" src="signature.png" alt="অরূপ বিশ্বাস — Arup Biswas written in Bengali">
         <div class="role"><span>Research associate, Harvard University</span><span>Group of Prof. L. Mahadevan</span><span>Non-equilibrium statistical physics</span></div>
@@ -304,30 +306,30 @@ footer .mono{font-family:var(--mono);font-size:12px}
         <img src="portrait.jpg" alt="Portrait of Arup Biswas">
       </figure>
     </div>
-    <div class="simbar"><span class="tag"><i></i>live · active Brownian particles · move your cursor</span><button class="btn-icon" data-pause>Pause</button></div>
+    <div class="simbar"><span class="tag"><i></i>live · active Brownian particles · they swim away from your mouse pointer (or finger)</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
   <div class="wrap">
     <section>
-      <div class="sec-h"><span class="n">00</span><h2>Hello, it's Arup.</h2></div>
+      <div class="sec-h"><span class="n">01</span><h2>Hello, it's Arup.</h2></div>
       <div class="prose">
         <p>Thanks a lot for taking the time to have a look at my website. Currently, I am a research associate at Harvard University, USA, in the group of <a href="https://softmath.seas.harvard.edu/" target="_blank" rel="noopener">Prof. L. Mahadevan</a>. Before this, I did my PhD with <a href="https://sites.google.com/view/arnab-pal/home" target="_blank" rel="noopener">Prof. Arnab Pal</a> at The Institute of Mathematical Sciences, India, working on many aspects of stochastic resetting. My broad research interest lies in non-equilibrium statistical physics. Though it is not that I have many things under my belt to display, I could not resist the temptation to see what my own personal website would look like. Please take a tour.</p>
       </div>
     </section>
     <section>
-      <div class="sec-h"><span class="n">01</span><h2>Take the tour</h2></div>
+      <div class="sec-h"><span class="n">02</span><h2>Take the tour</h2></div>
       <div class="tiles">
-        <a class="tile" href="#about" style="--tc:#b9a3ff"><div class="t">About Me</div><div class="d">Feynman, mathematics, and how I came to physics.</div><div class="k">Lorenz attractor</div></a>
-        <a class="tile" href="#research" style="--tc:#ff7a66"><div class="t">Research Activities</div><div class="d">Stochastic processes, stochastic resetting, reviewing and teaching.</div><div class="k">Resetting playground</div></a>
-        <a class="tile" href="#academics" style="--tc:#5cc6ff"><div class="t">Academics</div><div class="d">Harvard, IMSc Chennai, Jadavpur University.</div><div class="k">Diffusive spreading</div></a>
-        <a class="tile" href="#awards" style="--tc:#ffd36b"><div class="t">Awards/Fellowships</div><div class="d">Fulbright-Nehru, KVRSS, INYAS Saransh, INSPIRE.</div><div class="k">Galton board</div></a>
-        <a class="tile" href="#archive" style="--tc:#6fe3c1"><div class="t">Archive</div><div class="d">Projects, presentations and numerical works.</div><div class="k">2D Ising model</div></a>
-        <a class="tile" href="#gallery" style="--tc:#ff8fb6"><div class="t">Gallery</div><div class="d">Sketches, people, trips and a few pets.</div><div class="k">Vicsek flocking</div></a>
-        <a class="tile" href="#contact" style="--tc:#8be28f"><div class="t">Contact Me</div><div class="d">Addresses and e-mail.</div><div class="k">Double-well hopping</div></a>
+        <a class="tile" href="#about" style="--tc:#b9a3ff"><div class="t">About Me</div><div class="d">Feynman, mathematics, and how I came to physics.</div><div class="k">Simulation: Lorenz attractor</div></a>
+        <a class="tile" href="#research" style="--tc:#ff7a66"><div class="t">Research Activities</div><div class="d">Stochastic processes, stochastic resetting, reviewing and teaching.</div><div class="k">Simulation: stochastic resetting</div></a>
+        <a class="tile" href="#academics" style="--tc:#5cc6ff"><div class="t">Academics</div><div class="d">Harvard, IMSc Chennai, Jadavpur University.</div><div class="k">Simulation: diffusive spreading</div></a>
+        <a class="tile" href="#awards" style="--tc:#ffd36b"><div class="t">Awards/Fellowships</div><div class="d">Fulbright-Nehru, KVRSS, INYAS Saransh, INSPIRE.</div><div class="k">Simulation: Galton board</div></a>
+        <a class="tile" href="#archive" style="--tc:#6fe3c1"><div class="t">Archive</div><div class="d">Projects, presentations and numerical works.</div><div class="k">Simulation: 2D Ising model</div></a>
+        <a class="tile" href="#gallery" style="--tc:#ff8fb6"><div class="t">Gallery</div><div class="d">Sketches, people, trips and a few pets.</div><div class="k">Simulation: Vicsek flocking</div></a>
+        <a class="tile" href="#contact" style="--tc:#8be28f"><div class="t">Contact Me</div><div class="d">Addresses and e-mail.</div><div class="k">Simulation: double-well hopping</div></a>
       </div>
     </section>
     <section class="place">
       <img src="home-header-bg.jpg" alt="An open-air pavilion lit at night">
-      <div class="over"><p>Every process we can imagine is random on a certain timescale.</p><span class="muted">From my note on stochastic processes, <a href="#research">Research Activities</a></span></div>
+      <div class="over"><p>Every process we can imagine is random on a certain timescale.</p><span class="muted">— from my <a href="#research">Research Activities</a> page</span></div>
     </section>
   </div>
 </section>
@@ -340,7 +342,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">ẋ = σ(y−x) · ẏ = x(ρ−z)−y · ż = xy−βz</span>
       <h1>About <em>Me</em></h1>
-      <p class="lede">Non-linear dynamics was one of the courses I enjoyed most. Above: 220 trajectories that start almost together on the Lorenz attractor and quickly go their separate ways.</p>
+      <p class="lede">Above: 220 trajectories on the Lorenz attractor. They start almost at the same point and quickly go their separate ways, a hallmark of chaos in non-linear dynamics.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · Lorenz system, σ=10, ρ=28, β=8/3</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -379,7 +381,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">∂ₜp = D∇²p − r p + r δ(x − x₀)</span>
       <h1>Research <em>Activities</em></h1>
-      <p class="lede">Six random walkers, each sent back to the start at a constant rate. The drops in the traces are resetting events.</p>
+      <p class="lede">Above: six random walkers, each sent back to its starting point x₀ (dashed line) at a constant rate. The sudden jumps back to the dashed line are resetting events.</p>
       <div class="btns">
         <a class="btn primary" href="https://scholar.google.co.in/citations?user=mDjZQqEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
         <a class="btn" href="https://www.linkedin.com/in/arup-biswas-652b67218/" target="_blank" rel="noopener">LinkedIn</a>
@@ -456,7 +458,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">⟨x²(t)⟩ = 2Dt</span>
       <h1><em>Academics</em></h1>
-      <p class="lede">Many random walks leaving the same point. Their spread grows like √t, shown by the two envelope curves.</p>
+      <p class="lede">Above: many random walkers start from the same point. Their typical spread grows like √t, as traced by the two envelope curves.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · 1D random walks with ±2√(2Dt) envelope</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -534,7 +536,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">Binomial(n, ½) → 𝒩(n/2, n/4)</span>
       <h1>Awards / <em>Fellowships</em></h1>
-      <p class="lede">A Galton board: each ball takes a random left or right at every peg, and the bell curve emerges from the pile.</p>
+      <p class="lede">Above: a Galton board. Each ball goes randomly left or right at every peg, and together the balls pile up into a bell curve.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · Galton board, 12 rows</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -556,7 +558,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <canvas class="sim" data-sim="ising" aria-hidden="true"></canvas>
     <div class="hero-shade"></div>
     <div class="hero-in">
-      <span class="eq">H = −J Σ⟨ij⟩ sᵢsⱼ &nbsp;·&nbsp; T<sub>c</sub> ≈ 2.269 J/k<sub>B</sub></span>
+      <span class="eq"><span class="nw">H = −J Σ⟨ij⟩ sᵢsⱼ</span> &nbsp;·&nbsp; <span class="nw">T<sub>c</sub> ≈ 2.269 J/k<sub>B</sub></span></span>
       <h1><em>Archive</em></h1>
       <p class="lede">Here I shall upload some of my projects, presentations and numerical works.</p>
       <div class="ctl" style="max-width:420px;margin-top:22px;background:rgba(10,14,24,.7);padding:10px 14px;border-radius:12px;border:1px solid var(--line)">
@@ -564,16 +566,16 @@ footer .mono{font-family:var(--mono);font-size:12px}
       </div>
       <p class="ising-note" id="ising-m" style="margin-top:8px">magnetisation m = 0.000</p>
     </div>
-    <div class="simbar"><span class="tag"><i></i>live · 2D Ising model, Metropolis</span><button class="btn-icon" data-pause>Pause</button></div>
+    <div class="simbar"><span class="tag"><i></i>live · 2D Ising model, Metropolis algorithm</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
   <div class="wrap">
     <div class="arch">
       <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" data-view="https://www.youtube-nocookie.com/embed/4c321m-Vri8?autoplay=1" data-kind="video" data-title="Evolution of predators in a diffusive predator–prey model"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator–prey model, also known as the Lotka–Volterra model (best watched at 2× speed). This video has been uploaded to my YouTube channel, AB Physics.</p><span class="go">Watch here ▸</span></a>
       <a class="ar" href="https://www.youtube.com/c/ABPhysics2701" target="_blank" rel="noopener"><span class="ty">Channel · YouTube</span><h3>AB Physics</h3><p>www.youtube.com/c/ABPhysics2701</p><span class="go">Visit the channel ↗</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" data-view="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/preview" data-kind="doc" data-title="Bethe_Ansatz_Presentation (5).pdf"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on the Bethe Ansatz</p><span class="go">View Bethe_Ansatz_Presentation (5).pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" data-view="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/preview" data-kind="doc" data-title="Bethe_Ansatz.pdf"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on the Bethe Ansatz</p><span class="go">View Bethe_Ansatz.pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" data-view="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/preview" data-kind="doc" data-title="Arup Assignment 4.pdf"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite-size scaling</h3><p>Simulation of the 2D Ising model with finite-size scaling, in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">View Arup Assignment 4.pdf ▸</span></a>
-      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" data-view="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/preview" data-kind="doc" data-title="Animation.pdf"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes, in Python, for a projectile and for a 2D random walk of a particle</p><span class="go">View Animation.pdf ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" data-view="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/preview" data-kind="doc" data-title="Bethe Ansatz presentation"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on the Bethe Ansatz</p><span class="go">View slides ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" data-view="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/preview" data-kind="doc" data-title="Bethe Ansatz project report"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on the Bethe Ansatz</p><span class="go">View report ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" data-view="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/preview" data-kind="doc" data-title="2D Ising model with finite-size scaling (Fortran)"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite-size scaling</h3><p>Simulation of the 2D Ising model with finite-size scaling, in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">View PDF ▸</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" data-view="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/preview" data-kind="doc" data-title="Simple animation codes (Python)"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes, in Python, for a projectile and for a 2D random walk of a particle</p><span class="go">View code ▸</span></a>
     </div>
   </div>
 </section>
@@ -586,7 +588,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <div class="hero-in">
       <span class="eq">θᵢ(t+Δt) = ⟨θⱼ⟩<sub>|rᵢ−rⱼ|&lt;R</sub> + η ξᵢ</span>
       <h1><em>Gallery</em></h1>
-      <p class="lede">People who move together, as in the Vicsek model of flocking above.</p>
+      <p class="lede">Above: the Vicsek model of flocking. Each bird turns towards the average direction of its neighbours, with a little noise, and flocks form on their own.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · Vicsek flocking</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -612,9 +614,9 @@ footer .mono{font-family:var(--mono);font-size:12px}
     <canvas class="sim" data-sim="dwell" aria-hidden="true"></canvas>
     <div class="hero-shade"></div>
     <div class="hero-in">
-      <span class="eq">dx = −V′(x) dt + √(2T) dW &nbsp;·&nbsp; V(x) = x⁴/4 − x²/2</span>
+      <span class="eq"><span class="nw">dx = −V′(x) dt + √(2T) dW</span> &nbsp;·&nbsp; <span class="nw">V(x) = x⁴/4 − x²/2</span></span>
       <h1>Contact <em>Me</em></h1>
-      <p class="lede">Noise lets particles hop between the two wells. Write to me and I will hop back.</p>
+      <p class="lede">Above: particles in a double-well potential. Random kicks from the noise occasionally carry a particle over the barrier into the other well.</p>
     </div>
     <div class="simbar"><span class="tag"><i></i>live · Langevin particles in a double well</span><button class="btn-icon" data-pause>Pause</button></div>
   </header>
@@ -635,7 +637,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
 
 </main>
 
-<footer><div class="in"><span>© Arup Biswas</span><span class="mono">All simulations run live in your browser · stochastic, so no two visits look the same</span></div></footer>
+<footer><div class="in"><span>© Arup Biswas</span><span class="mono">Every animation on this site is a live simulation running in your browser, so no two visits look exactly the same</span></div></footer>
 
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title">
   <div class="vbox">
@@ -673,6 +675,7 @@ SIMS.abp=function(cv){
   function init(){ ({ctx,w,h}=fit(cv)); const N=Math.round(Math.min(320,Math.max(110,w*h/4200))); P=[]; for(let i=0;i<N;i++){const x=Math.random()*w,y=Math.random()*h; P.push({x,y,px:x,py:y,th:Math.random()*TAU});} ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); }
   cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect(); ptr.x=e.clientX-r.left; ptr.y=e.clientY-r.top;});
   cv.parentElement.addEventListener('pointerleave',()=>{ptr.x=ptr.y=-1e4;});
+  ['pointerup','pointercancel'].forEach(t=>cv.parentElement.addEventListener(t,e=>{ if(e.pointerType!=='mouse'){ptr.x=ptr.y=-1e4;} }));
   function step(dt){ const sr=Math.sqrt(2*Dr*dt), st=Math.sqrt(2*Dt*dt);
     for(const p of P){ p.px=p.x;p.py=p.y; p.th+=sr*gauss(); let fx=0,fy=0; const dx=p.x-ptr.x,dy=p.y-ptr.y,d2=dx*dx+dy*dy; if(d2<140*140&&d2>1){const d=Math.sqrt(d2), f=9000/(d2+400); fx=f*dx/d; fy=f*dy/d;}
       p.x+=(v0*Math.cos(p.th)+fx)*dt+st*gauss(); p.y+=(v0*Math.sin(p.th)+fy)*dt+st*gauss();
