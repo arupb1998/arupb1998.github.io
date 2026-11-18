@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arup Biswas</title>
+<meta name="description" content="Arup Biswas — non-equilibrium statistical physics, stochastic processes, Harvard University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: every page opens on a live simulation "plate", content sits below on an ink lab-notebook ground. */
+  --bg:#0a0e18;
+  --surface:#121a2b;
+  --surface-2:#18223a;
+  --line:#26324d;
+  --text:#e8ecf5;
+  --muted:#98a3bd;
+  --accent:#f5a83c;
+  --accent-ink:#1b1204;
+  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme:dark;
+}
+[data-page="about"]{--accent:#b9a3ff;--accent-ink:#140c2a}
+[data-page="research"]{--accent:#ff7a66;--accent-ink:#2a0d08}
+[data-page="academics"]{--accent:#5cc6ff;--accent-ink:#04182a}
+[data-page="awards"]{--accent:#ffd36b;--accent-ink:#2a1f04}
+[data-page="archive"]{--accent:#6fe3c1;--accent-ink:#04221a}
+[data-page="gallery"]{--accent:#ff8fb6;--accent-ink:#2a0816}
+[data-page="contact"]{--accent:#8be28f;--accent-ink:#0a2210}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:none}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:30;background:rgba(10,14,24,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;white-space:nowrap}
+.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+.brand b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.2px}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{color:var(--muted);text-decoration:none;font-size:14px;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.links a:hover{color:var(--text);background:var(--surface)}
+.links a[aria-current="page"]{color:var(--accent-ink);background:var(--accent);font-weight:500}
+
+/* ---------- hero plate ---------- */
+.hero{position:relative;overflow:hidden;min-height:440px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:radial-gradient(120% 90% at 80% 0%, color-mix(in srgb,var(--accent) 10%, transparent), transparent 60%), var(--bg)}
+.hero canvas.sim{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:84px 20px 72px;pointer-events:none}
+.hero-in > *{pointer-events:auto}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,14,24,.86) 0%, rgba(10,14,24,.45) 42%, rgba(10,14,24,0) 70%);pointer-events:none}
+.eq{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.3px;display:inline-flex;gap:10px;align-items:center;padding:5px 12px;border:1px solid color-mix(in srgb,var(--accent) 40%, transparent);border-radius:999px;background:rgba(10,14,24,.6)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,8vw,104px);line-height:.98;margin-top:18px;letter-spacing:-.5px}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero .lede{max-width:56ch;color:#cdd4e4;margin-top:16px;font-size:18px}
+.simbar{position:absolute;right:16px;bottom:14px;display:flex;gap:10px;align-items:center;z-index:2;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.simbar .tag{background:rgba(10,14,24,.72);padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.simbar .tag i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:7px;vertical-align:1px;animation:pulse 1.6s infinite}
+.simbar .tag.paused i{animation:none;opacity:.4}
+@keyframes pulse{50%{opacity:.25}}
+.btn-icon{font:inherit;color:var(--text);background:rgba(10,14,24,.72);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.btn-icon:hover{border-color:var(--accent)}
+
+/* ---------- content ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:64px 20px 88px;display:grid;gap:64px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+.sec-h .n{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--line);padding:2px 8px;border-radius:6px}
+.sec-h h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4vw,44px);line-height:1.05}
+.prose{max-width:68ch;color:#d5dbe8}
+.prose p + p{margin-top:14px}
+.muted{color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;padding:10px 18px;border-radius:10px;text-decoration:none;border:1px solid var(--line);color:var(--text);background:var(--surface)}
+.btn:hover{border-color:var(--accent);text-decoration:none}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn svg{width:16px;height:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;padding:6px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+figure{margin:0}
+figcaption{font-size:14px;color:var(--muted);margin-top:10px}
+
+/* ---------- home ---------- */
+.home-hero .hero-in{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center;padding-top:72px;padding-bottom:72px}
+.sig{height:54px;width:auto;margin-top:10px;filter:brightness(1.35) saturate(1.1) drop-shadow(0 0 12px rgba(80,90,255,.45))}
+.role{font-family:var(--mono);font-size:14px;color:var(--muted);margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.role span::before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:1px;margin-right:8px;vertical-align:2px}
+.portrait{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(0,0,0,.8);aspect-ratio:4/5;max-width:380px;justify-self:end;width:100%}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,14,24,.75))}
+.portrait .cap{position:absolute;left:16px;bottom:14px;z-index:1;font-family:var(--mono);font-size:12px;color:#cfd6e6}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tile{display:block;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;position:relative;overflow:hidden;transition:transform .2s, border-color .2s}
+.tile:hover{transform:translateY(-3px);border-color:var(--tc)}
+.tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tc)}
+.tile .t{font-family:var(--display);font-size:28px;line-height:1.1}
+.tile .d{font-size:14px;color:var(--muted);margin-top:6px}
+.tile .k{font-family:var(--mono);font-size:11px;color:var(--tc);margin-top:14px;letter-spacing:.4px;text-transform:uppercase}
+.place{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:260px;display:flex;align-items:flex-end}
+.place img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.7)}
+.place .over{position:relative;padding:28px;max-width:60ch;background:linear-gradient(0deg,rgba(10,14,24,.92),rgba(10,14,24,0))}
+.place .over p{font-family:var(--display);font-size:clamp(22px,2.6vw,30px);line-height:1.25}
+
+/* ---------- about ---------- */
+.quote{position:relative;padding:40px 40px 34px;border-radius:20px;background:linear-gradient(135deg,var(--surface),var(--bg));border:1px solid var(--line)}
+.quote blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(30px,4.2vw,52px);line-height:1.1}
+.quote blockquote::before{content:"\201C";color:var(--accent);font-size:1.4em;line-height:0;vertical-align:-.35em;margin-right:6px}
+.quote cite{display:block;margin-top:16px;font-style:normal;font-family:var(--mono);font-size:14px;color:var(--accent)}
+.quote p{margin-top:18px;color:#cdd4e4;max-width:60ch}
+
+/* ---------- research ---------- */
+.yt{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:220px;text-decoration:none;color:var(--text);background:radial-gradient(90% 120% at 100% 0%, color-mix(in srgb,var(--accent) 22%, transparent), transparent 70%), var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.yt:hover{border-color:var(--accent);text-decoration:none}
+.yt .play{width:58px;height:58px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.yt .play svg{width:22px;height:22px;fill:var(--accent-ink);margin-left:3px}
+.yt .lbl{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.yt .ttl{font-family:var(--display);font-size:28px;line-height:1.1}
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:start}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.lab-top{display:grid;grid-template-columns:1.5fr 1fr;min-height:380px}
+.lab-top canvas{width:100%;height:100%;display:block;min-height:320px}
+.lab-field{position:relative;border-right:1px solid var(--line);background:#080b14}
+.lab-side{display:flex;flex-direction:column}
+.lab-hist{position:relative;flex:1;min-height:220px;border-bottom:1px solid var(--line)}
+.lab-ctrl{padding:18px 20px;display:grid;gap:14px}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:14px}
+.ctl label{font-family:var(--mono);color:var(--muted);min-width:118px}
+.ctl output{font-family:var(--mono);font-variant-numeric:tabular-nums;min-width:58px;text-align:right}
+input[type=range]{accent-color:var(--accent);width:100%}
+.lab-foot{display:flex;flex-wrap:wrap;gap:8px 22px;padding:12px 20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.list{display:grid;gap:12px}
+.item{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.item .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--accent);font-family:var(--mono);font-size:13px}
+.item b{font-weight:600}
+.item .s{color:var(--muted);font-size:15px}
+
+/* ---------- academics ---------- */
+.timeline{position:relative;display:grid;gap:22px;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--accent),var(--line))}
+.tl{position:relative;display:grid;grid-template-columns:1fr 112px;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.tl::before{content:"";position:absolute;left:-29px;top:30px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl.now::before{background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 22%, transparent)}
+.tl .yr{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.tl h3{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;margin-top:4px}
+.tl .meta{margin-top:8px;display:grid;gap:2px;font-size:15.5px;color:#cfd6e5}
+.tl .meta .k{color:var(--muted)}
+.tl .logo{width:112px;height:112px;border-radius:16px;background:#f2f4f8;display:grid;place-items:center;overflow:hidden}
+.tl .logo img{width:88%;height:88%;object-fit:contain}
+.tl .logo.photo img{width:100%;height:100%;object-fit:cover}
+.tl.gap{grid-template-columns:1fr;border-style:dashed;background:transparent}
+.tl.gap h3{font-size:24px;color:var(--muted)}
+
+/* ---------- awards ---------- */
+.awards{display:grid;gap:16px}
+.aw{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.aw .when{font-family:var(--display);font-size:44px;line-height:1;color:var(--accent)}
+.aw .when small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-top:6px}
+.aw h3{font-size:19px;font-weight:600;line-height:1.35}
+.aw p{color:#cfd6e5;margin-top:6px}
+.ranks{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.rank{display:flex;flex-direction:column;padding:10px 16px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
+.rank b{font-family:var(--mono);font-size:22px;color:var(--accent);font-variant-numeric:tabular-nums}
+.rank span{font-size:13px;color:var(--muted)}
+
+/* ---------- archive ---------- */
+.arch{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.ar{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .2s, transform .2s}
+.ar:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.ar .ty{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
+.ar h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.15}
+.ar p{color:var(--muted);font-size:15px}
+.ar .go{margin-top:auto;font-size:14px;color:var(--accent)}
+.ising-note{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* ---------- gallery ---------- */
+.sketches{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sketches button{padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#f3f1ec;cursor:zoom-in;aspect-ratio:3/4}
+.sketches img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.sketches button:hover img{transform:scale(1.04)}
+.masonry{columns:3 300px;column-gap:16px}
+.ph{break-inside:avoid;margin:0 0 16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ph button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.ph img{width:100%;height:auto;transition:transform .4s}
+.ph button:hover img{transform:scale(1.03)}
+.ph figcaption{padding:12px 16px 14px;margin:0;color:#cfd6e5;font-size:14.5px}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(5,7,12,.92);display:none;align-items:center;justify-content:center;padding:24px;flex-direction:column;gap:14px}
+.lightbox.open{display:flex}
+.lightbox img{max-height:80vh;max-width:min(1100px,100%);width:auto;border-radius:10px}
+.lightbox p{color:#dfe4ef;max-width:70ch;text-align:center}
+.lightbox .x{position:absolute;top:16px;right:16px}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ct{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.ct .k{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
+.ct address{font-style:normal;font-size:18px;margin-top:10px;line-height:1.5}
+.mails{display:grid;gap:10px;margin-top:12px}
+.mail{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:var(--mono);font-size:14.5px;overflow-wrap:anywhere}
+.mail button{font:inherit;font-size:12px;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:8px;padding:4px 10px;cursor:pointer;flex-shrink:0}
+.mail button:hover{border-color:var(--accent)}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .in{max-width:1180px;margin:0 auto;padding:26px 20px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+footer .mono{font-family:var(--mono);font-size:12px}
+
+.page{display:none}
+.page.active{display:block}
+
+@media (max-width:900px){
+  .home-hero .hero-in{grid-template-columns:1fr}
+  .portrait{justify-self:start;max-width:300px}
+  .split,.lab-top{grid-template-columns:1fr}
+  .lab-field{border-right:0;border-bottom:1px solid var(--line);min-height:320px}
+  .hero-shade{background:linear-gradient(180deg, rgba(10,14,24,.55), rgba(10,14,24,.85))}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .brand b{font-size:20px}
+  .nav-in{flex-wrap:wrap;gap:6px}
+  .links{margin-left:0;width:100%}
+  .tl{grid-template-columns:1fr}
+  .tl .logo{width:80px;height:80px}
+  .aw{grid-template-columns:1fr;gap:8px}
+  .contact{grid-template-columns:1fr}
+  .hero{min-height:380px}
+  .eq{font-size:11.5px;flex-wrap:wrap;border-radius:12px}
+  .simbar .tag{display:none}
+  .sketches{grid-template-columns:1fr 1fr}
+  .quote{padding:28px 22px}
+  .wrap{gap:48px;padding-top:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tile,.ar,.sketches img,.ph img{transition:none}
+  .simbar .tag i{animation:none}
+}
+</style>
+</head>
+<body data-page="home">
+
+<nav class="nav" aria-label="Site">
+  <div class="nav-in">
+    <a class="brand" href="#home"><span class="brand-dot" aria-hidden="true"></span><b>Arup Biswas</b></a>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#about">About Me</a>
+      <a href="#research">Research Activities</a>
+      <a href="#academics">Academics</a>
+      <a href="#awards">Awards/Fellowships</a>
+      <a href="#archive">Archive</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact Me</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ======================= HOME ======================= -->
+<section class="page" id="page-home" data-name="home">
+  <header class="hero home-hero">
+    <canvas class="sim" data-sim="abp" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <div>
+        <span class="eq">dr/dt = v₀ n̂(θ) + √(2D) ξ(t) &nbsp;·&nbsp; dθ/dt = √(2D<sub>r</sub>) η(t)</span>
+        <h1>Arup <em>Biswas</em></h1>
+        <img class="sig" src="signature.png" alt="অরূপ বিশ্বাস — Arup Biswas written in Bengali">
+        <div class="role"><span>Research associate, Harvard University</span><span>Group of Prof. L. Mahadevan</span><span>Non-equilibrium statistical physics</span></div>
+        <div class="btns">
+          <a class="btn primary" href="https://docs.google.com/document/d/1Wxi5dEAwEr4SqzUOg2q5hxWupTHnZrvox1XjgCVetqI/edit?usp=sharing" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>CV</a>
+          <a class="btn" href="#research">Research</a>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="portrait.jpg" alt="Portrait of Arup Biswas">
+        <figcaption class="cap">Cambridge, MA</figcaption>
+      </figure>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · active Brownian particles · move your cursor</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <section>
+      <div class="sec-h"><span class="n">00</span><h2>Hello, it's Arup.</h2></div>
+      <div class="prose">
+        <p>Thanks a lot for your time to have a look at my website. Currently, I am a research associate at Harvard University in the group of <a href="https://softmath.seas.harvard.edu/" target="_blank" rel="noopener">Prof. L. Mahadevan</a>. My broad research interest lies in non-equilibrium statistical physics. Though it is not that I have many things under my belt to display, I could not resist the temptation to take a dig at what my personal website would look like. Please have a tour of it.</p>
+      </div>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">01</span><h2>Take the tour</h2></div>
+      <div class="tiles">
+        <a class="tile" href="#about" style="--tc:#b9a3ff"><div class="t">About Me</div><div class="d">Feynman, mathematics, and how I came to physics.</div><div class="k">Lorenz attractor</div></a>
+        <a class="tile" href="#research" style="--tc:#ff7a66"><div class="t">Research Activities</div><div class="d">Stochastic processes, stochastic resetting, reviewing and teaching.</div><div class="k">Resetting playground</div></a>
+        <a class="tile" href="#academics" style="--tc:#5cc6ff"><div class="t">Academics</div><div class="d">Harvard, IMSc Chennai, Jadavpur University.</div><div class="k">Diffusive spreading</div></a>
+        <a class="tile" href="#awards" style="--tc:#ffd36b"><div class="t">Awards/Fellowships</div><div class="d">Fulbright-Nehru, KVRSS, INYAS Saransh, INSPIRE.</div><div class="k">Galton board</div></a>
+        <a class="tile" href="#archive" style="--tc:#6fe3c1"><div class="t">Archive</div><div class="d">Projects, presentations and numerical works.</div><div class="k">2D Ising model</div></a>
+        <a class="tile" href="#gallery" style="--tc:#ff8fb6"><div class="t">Gallery</div><div class="d">Sketches, people, trips and a few pets.</div><div class="k">Vicsek flocking</div></a>
+        <a class="tile" href="#contact" style="--tc:#8be28f"><div class="t">Contact Me</div><div class="d">Addresses and e-mail.</div><div class="k">Double-well hopping</div></a>
+      </div>
+    </section>
+    <section class="place">
+      <img src="home-header-bg.jpg" alt="An open-air pavilion lit at night">
+      <div class="over"><p>Every process we can imagine is random on a certain timescale.</p><span class="muted">From my note on stochastic processes, <a href="#research">Research Activities</a></span></div>
+    </section>
+  </div>
+</section>
+
+<!-- ======================= ABOUT ======================= -->
+<section class="page" id="page-about" data-name="about">
+  <header class="hero">
+    <canvas class="sim" data-sim="lorenz" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">ẋ = σ(y−x) · ẏ = x(ρ−z)−y · ż = xy−βz</span>
+      <h1>About <em>Me</em></h1>
+      <p class="lede">Non-linear dynamics was one of the courses I enjoyed most. Above: two hundred trajectories that start almost together on the Lorenz attractor and quickly go their separate ways.</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · Lorenz system, σ=10, ρ=28, β=8/3</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <section class="quote">
+      <blockquote>I was an ordinary person who studied hard</blockquote>
+      <cite>— Richard Feynman</cite>
+      <p>Whenever I felt down, this line by Feynman acted like the ultimate medicine for me.</p>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">01</span><h2>Brief Info</h2></div>
+      <div class="prose">
+        <p>Mathematics was the first thing that excited me towards science. Had a plan to do honours in it until I started to appreciate the beauty of it in the application of Physics. Now I feel lucky to have chosen Physics as my part of life. I enjoy learning basic science, solving Physics problems analytically and numerically a lot.</p>
+        <p>My Mother and Father constitute an integral part of my journey. Especially I would credit my Maa (Mother) for making me the person I am today.</p>
+      </div>
+    </section>
+    <section class="grid2">
+      <div class="card">
+        <div class="sec-h" style="margin-bottom:16px"><span class="n">02</span><h2 style="font-size:30px">Special topics that I took courses and found interesting</h2></div>
+        <div class="chips"><span class="chip">Non-linear dynamics</span><span class="chip">Solid State Physics</span><span class="chip">Stochastic processes</span><span class="chip">Computational Physics</span></div>
+      </div>
+      <div class="card">
+        <div class="sec-h" style="margin-bottom:16px"><span class="n">03</span><h2 style="font-size:30px">Programming knowledge</h2></div>
+        <div class="chips"><span class="chip">Python and JAX</span><span class="chip">Mathematica</span><span class="chip">Fortran</span></div>
+        <p class="muted" style="margin-top:14px;font-size:15px">(also learnt basics of C but did not use that much afterwards ;))</p>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ======================= RESEARCH ======================= -->
+<section class="page" id="page-research" data-name="research">
+  <header class="hero">
+    <canvas class="sim" data-sim="traces" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">∂ₜp = D∇²p − r p + r δ(x − x₀)</span>
+      <h1>Research <em>Activities</em></h1>
+      <p class="lede">Six random walkers, each sent back to the start at a constant rate. The drops in the traces are resetting events.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://scholar.google.co.in/citations?user=mDjZQqEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="btn" href="https://www.linkedin.com/in/arup-biswas-652b67218/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://orcid.org/0009-0007-5611-7709" target="_blank" rel="noopener">ORCID</a>
+      </div>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · 1D diffusion with Poissonian resetting</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <section>
+      <p class="muted">For publications please look into my <a href="https://scholar.google.co.in/citations?user=mDjZQqEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>. Other platforms: <a href="https://www.linkedin.com/in/arup-biswas-652b67218/" target="_blank" rel="noopener">LinkedIn</a>, <a href="https://orcid.org/0009-0007-5611-7709" target="_blank" rel="noopener">ORCID</a>.</p>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">01</span><h2>What is a stochastic process? Why learn it?</h2></div>
+      <div class="split">
+        <div class="prose">
+          <p>This has been best explained by Obama in the video on the right side/below. Simply put, it is a random process. There are plenty of stochastic processes that we encounter in our day-to-day life. For instance, when you are searching randomly for the lost smartphone/key, tossing a coin to decide who will go first, kicking the football randomly without seeing if there is anyone to receive it, etc.</p>
+          <p>I believe every process we can imagine is random on a certain timescale. For example, you go to lunch at 1 P.M. every day. But if I ask, at what minutes and what seconds exactly, that has to be random. Naively, one might not be bothered so much by such randomness since, unlike Newton's laws, no prediction could be made to exactly determine the process's future. However, one can always predict the future outcome of the process on a probabilistic level with the help of the theory of stochastic processes.</p>
+          <p>For e.g., no one can predict the stock market's movement, yet physicists, economists, and mathematicians greatly rely on the theory of stochastic processes to predict the market's nature. Biological processes such as DNA assembly and RNA transcription have the theory of stochastic processes in their core. Furthermore, the recent development of artificial intelligence (AI) is nothing but a niche application of the theory of stochastic processes. Thus, we need to have an in-depth understanding of stochastic processes.</p>
+        </div>
+        <a class="yt" href="https://www.youtube.com/watch?v=_6wK-4pDVVg" target="_blank" rel="noopener">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l14 8-14 8z"/></svg></span>
+          <span><span class="lbl">YouTube · opens in a new tab</span><br><span class="ttl">“Stochastic process”, as explained by Obama</span></span>
+        </a>
+      </div>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">02</span><h2>Stochastic resetting</h2></div>
+      <div class="prose">
+        <p>Imagine searching for a lost item: if you wander aimlessly for too long without success, your best strategy is often to return to your starting point and begin anew. This simple yet profound concept, stochastic resetting, transforms how we understand search processes across nature and technology. While randomly exploring a space guarantees you will eventually find a target, random walks are notoriously prone to drifting off into vast, empty regions, leading to drastically inefficient search times. Resetting acts as a powerful optimization tool that cuts down these times by preventing infinite wandering.</p>
+        <p>In biology and ecology, this framework explains how proteins efficiently locate specific DNA sequences or how animals optimize foraging in unpredictable landscapes. In chemistry, resetting mechanisms can govern reaction rates and catalytic processes. Beyond the natural world, computer scientists apply these principles to streamline randomized search algorithms, while queuing theory uses them to manage network delays by intentionally restarting stalled tasks. By introducing a "restart" button to random motion, we uncover a universal mathematical mechanism that turns fundamentally inefficient wandering into highly optimized exploration.</p>
+        <p>This visualization below tracks a swarm of particles undergoing random 2D diffusion, where each particle occasionally triggers a return to the origin. By adjusting the sliders, you can observe in real-time how the interplay between the diffusion constant, resetting rate, and return speed shapes the steady-state distribution of the system.</p>
+      </div>
+      <div class="lab" style="margin-top:28px">
+        <div class="lab-top">
+          <div class="lab-field"><canvas id="lab-field" aria-label="Particles diffusing in 2D and returning to the origin"></canvas></div>
+          <div class="lab-side">
+            <div class="lab-hist"><canvas id="lab-hist" aria-label="Radial distribution of particle distances from the origin"></canvas></div>
+            <div class="lab-ctrl">
+              <div class="ctl"><label for="s-D">Diffusion D</label><input type="range" id="s-D" min="0.1" max="3" step="0.05" value="1"><output id="o-D">1.00</output></div>
+              <div class="ctl"><label for="s-r">Resetting rate r</label><input type="range" id="s-r" min="0" max="2" step="0.02" value="0.5"><output id="o-r">0.50</output></div>
+              <div class="ctl"><label for="s-v">Return speed v</label><input type="range" id="s-v" min="0.5" max="20.5" step="0.5" value="20.5"><output id="o-v">instant</output></div>
+            </div>
+          </div>
+        </div>
+        <div class="lab-foot">
+          <span class="legend"><i style="background:#e8ecf5"></i>diffusing</span>
+          <span class="legend"><i style="background:var(--accent)"></i>returning to origin</span>
+          <span class="legend"><i style="background:#5cc6ff"></i>theory, instantaneous return: ρ α² K₀(αρ), α = √(r/D)</span>
+          <span id="lab-stats" style="margin-left:auto"></span>
+        </div>
+      </div>
+    </section>
+    <section>
+      <figure>
+        <img src="group-imsc.jpg" alt="Research group at IMSc" style="border-radius:16px;border:1px solid var(--line);width:100%;max-height:640px;object-fit:cover">
+        <figcaption>Current members of our group at IMSc with the leader standing behind ;)</figcaption>
+      </figure>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">03</span><h2>Other Activities</h2></div>
+      <div class="list">
+        <div class="item"><div class="ico">1</div><div><b>Reviewer</b><div class="chips" style="margin-top:8px"><span class="chip">Physical Review E</span><span class="chip">Physical Review Letters</span><span class="chip">Physical Review Research</span><span class="chip">Chaos</span></div></div></div>
+        <div class="item"><div class="ico">2</div><div><b>Teaching Assistant for the course: Computational Physics</b><div class="s">2023, IMSc. Course instructor: Dr. Sayantan Sharma</div></div></div>
+        <div class="item"><div class="ico">3</div><div><b>Teaching Assistant for the course: Stochastic Processes</b><div class="s">2023, 2025, IMSc. Course instructor: Dr. Arnab Pal</div></div></div>
+        <div class="item"><div class="ico">4</div><div><b>Volunteered in organizing</b><div class="chips" style="margin-top:8px"><span class="chip">IMSc 60 conference (2023)</span><span class="chip">Frontiers in Non-equilibrium Physics conference (2023)</span><span class="chip">Science at the Sabha (2023)</span><span class="chip">Science at the Sabha (2024)</span><span class="chip">Amal Kumar Raychaudhuri Centenary conference (2024)</span><span class="chip">Chennai Soft Matter Days conference (2024)</span></div></div></div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ======================= ACADEMICS ======================= -->
+<section class="page" id="page-academics" data-name="academics">
+  <header class="hero">
+    <canvas class="sim" data-sim="spread" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">⟨x²(t)⟩ = 2Dt</span>
+      <h1><em>Academics</em></h1>
+      <p class="lede">Many random walks leaving the same point. Their spread grows like √t, shown by the two envelope curves.</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · 1D random walks with ±2√(2Dt) envelope</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <div class="timeline">
+      <article class="tl now">
+        <div>
+          <div class="yr">2025 – present</div>
+          <h3>Postdoctoral researcher</h3>
+          <div class="meta">
+            <span class="k">* Previously Fulbright-Nehru doctoral researcher</span>
+            <span><a href="https://seas.harvard.edu/" target="_blank" rel="noopener">Harvard University</a>, Cambridge, USA</span>
+            <span><span class="k">Host:</span> <a href="https://www.physics.harvard.edu/people/facpages/mahadevan" target="_blank" rel="noopener">Prof. L. Mahadevan</a></span>
+            <span><span class="k">Theme of research:</span> Navigation and optimal control, Error correction in biochemical processes</span>
+          </div>
+        </div>
+        <div class="logo"><img src="logo-harvard.png" alt="Harvard University logo"></div>
+      </article>
+      <article class="tl">
+        <div>
+          <div class="yr">2021 – 2025</div>
+          <h3>Ph.D. in Theoretical Physics</h3>
+          <div class="meta">
+            <span><a href="http://www.imsc.res.in/" target="_blank" rel="noopener">The Institute of Mathematical Sciences</a>, Chennai, Tamil Nadu</span>
+            <span><span class="k">Supervisor:</span> <a href="https://sites.google.com/view/arnab-pal/home" target="_blank" rel="noopener">Dr. Arnab Pal</a></span>
+            <span><span class="k">Theme of research:</span> Non-equilibrium statistical mechanics, First-passage processes</span>
+          </div>
+        </div>
+        <div class="logo"><img src="logo-imsc.png" alt="The Institute of Mathematical Sciences logo"></div>
+      </article>
+      <article class="tl gap">
+        <div><div class="yr">2020 – 2021</div><h3>Jobless (due to Covid)</h3></div>
+      </article>
+      <article class="tl">
+        <div>
+          <div class="yr">2020</div>
+          <h3>M.Sc. Physics</h3>
+          <div class="meta"><span>1st class with distinction</span><span><a href="http://www.jaduniv.edu.in/" target="_blank" rel="noopener">Jadavpur University</a>, Kolkata, West Bengal</span></div>
+        </div>
+        <div class="logo"><img src="logo-ju-msc.png" alt="Jadavpur University logo"></div>
+      </article>
+      <article class="tl">
+        <div>
+          <div class="yr">2018</div>
+          <h3>B.Sc Physics</h3>
+          <div class="meta"><span>1st class with distinction</span><span><a href="http://www.jaduniv.edu.in/" target="_blank" rel="noopener">Jadavpur University</a>, Kolkata, West Bengal</span></div>
+        </div>
+        <div class="logo"><img src="logo-ju-bsc.png" alt="Jadavpur University logo"></div>
+      </article>
+      <article class="tl">
+        <div>
+          <div class="yr">2015</div>
+          <h3>Class XII</h3>
+          <div class="meta"><span>Shyamnagar Kantichandra High School, Shyamnagar, West Bengal</span></div>
+        </div>
+        <div class="logo photo"><img src="logo-school12.jpg" alt="Shyamnagar Kantichandra High School emblem"></div>
+      </article>
+      <article class="tl">
+        <div>
+          <div class="yr">2013</div>
+          <h3>Class X</h3>
+          <div class="meta"><span>Sundia High School, Kankinara, West Bengal</span></div>
+        </div>
+        <div class="logo photo"><img src="logo-school10.jpg" alt="Sundia High School building"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= AWARDS ======================= -->
+<section class="page" id="page-awards" data-name="awards">
+  <header class="hero">
+    <canvas class="sim" data-sim="galton" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">Binomial(n, ½) → 𝒩(n/2, n/4)</span>
+      <h1>Awards / <em>Fellowships</em></h1>
+      <p class="lede">A Galton board: each ball takes a random left or right at every peg, and the bell curve emerges from the pile.</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · Galton board, 12 rows</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <div class="awards">
+      <article class="aw"><div class="when">2025<small>Fellowship</small></div><div><h3><a href="https://www.usief.org.in/home-institution-india/the-institute-of-mathematical-sciences/" target="_blank" rel="noopener">Fulbright-Nehru doctoral research fellowship</a></h3><p>Harvard University, Cambridge, USA</p></div></article>
+      <article class="aw"><div class="when">2025<small>Award</small></div><div><h3><a href="https://www.kvrss.org/research-awards.html" target="_blank" rel="noopener">KVRSS research award</a></h3><p>3rd position in a nationwide programme for my research work (write up + talk)</p></div></article>
+      <article class="aw"><div class="when">2023<small>Prize</small></div><div><h3><a href="https://inyas.in/2024/05/19/winners-of-saransh-23-thesis-presentation-competition/" target="_blank" rel="noopener">INYAS Saransh</a></h3><p>3rd prize in a national competition for presenting my research topic in simple language (<a href="https://www.youtube.com/watch?v=rFnfHsHMV8Y" target="_blank" rel="noopener">Link to my presentation</a>)</p></div></article>
+      <article class="aw"><div class="when">B.Sc.<small>M.Sc. · Ph.D.</small></div><div><h3>INSPIRE scholarship</h3><p>INSPIRE scholarship at B.Sc. and M.Sc. for being in top 1% in board exams; INSPIRE fellowship offer letter (not availed) for Ph.D. for having good academic record in B.Sc and M.Sc.</p></div></article>
+      <article class="aw"><div class="when">2021<small>National exams</small></div><div><h3>National exams</h3>
+        <div class="ranks"><div class="rank"><b>AIR 31</b><span>GATE 2021</span></div><div class="rank"><b>AIR 21</b><span>JEST 2021</span></div><div class="rank"><b>AIR 115</b><span>CSIR NET JRF 2021</span></div></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ARCHIVE ======================= -->
+<section class="page" id="page-archive" data-name="archive">
+  <header class="hero">
+    <canvas class="sim" data-sim="ising" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">H = −J Σ⟨ij⟩ sᵢsⱼ &nbsp;·&nbsp; T<sub>c</sub> ≈ 2.269 J/k<sub>B</sub></span>
+      <h1><em>Archive</em></h1>
+      <p class="lede">Here I shall upload some of my projects, presentations and numerical works.</p>
+      <div class="ctl" style="max-width:420px;margin-top:22px;background:rgba(10,14,24,.7);padding:10px 14px;border-radius:12px;border:1px solid var(--line)">
+        <label for="s-T">Temperature T</label><input type="range" id="s-T" min="1.2" max="3.6" step="0.01" value="2.27"><output id="o-T">2.27</output>
+      </div>
+      <p class="ising-note" id="ising-m" style="margin-top:8px">magnetisation m = 0.000</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · 2D Ising model, Metropolis</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <div class="arch">
+      <a class="ar" href="https://www.youtube.com/watch?v=4c321m-Vri8" target="_blank" rel="noopener"><span class="ty">Video · YouTube</span><h3>Evolution of predators in a diffusive predator–prey model</h3><p>This is an animation of the evolution of predators in a diffusive predator-prey model also known as the Lotka-Volterra model (play in 2X speed). This video has been uploaded in my Youtube channel AB Physics.</p><span class="go">Watch the video ↗</span></a>
+      <a class="ar" href="https://www.youtube.com/c/ABPhysics2701" target="_blank" rel="noopener"><span class="ty">Channel · YouTube</span><h3>AB Physics</h3><p>www.youtube.com/c/ABPhysics2701</p><span class="go">Visit the channel ↗</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1Gmzr2yJZQcFBnuKVWGZI3bgKuSEafJXU/view" target="_blank" rel="noopener"><span class="ty">Slides · PDF</span><h3>Bethe Ansatz presentation</h3><p>Presentation file of my study on Bethe Ansatz</p><span class="go">Open Bethe_Ansatz_Presentation (5).pdf ↗</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1v6jWMaQr9R_q1vxmXrv1J-1OcaD3bG5D/view" target="_blank" rel="noopener"><span class="ty">Report · PDF</span><h3>Bethe Ansatz project report</h3><p>Project report on Bethe Ansatz</p><span class="go">Open Bethe_Ansatz.pdf ↗</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1ewiyjs_O_mrDWbLxzCQBlcUXlAvra_nT/view" target="_blank" rel="noopener"><span class="ty">Numerics · Fortran</span><h3>2D Ising model with finite size scaling</h3><p>Simulation of 2D Ising model with finite size scaling in Fortran. The lattice at the top of this page is a live version of the same model.</p><span class="go">Open Arup Assignment 4.pdf ↗</span></a>
+      <a class="ar" href="https://drive.google.com/file/d/1e05sZ3NHyFiESfbNImj3rE223a1SRAUW/view" target="_blank" rel="noopener"><span class="ty">Code · Python</span><h3>Simple animation codes</h3><p>Simple animation codes for projectile, 2D- random walk of a particle in Python</p><span class="go">Open Animation.pdf ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GALLERY ======================= -->
+<section class="page" id="page-gallery" data-name="gallery">
+  <header class="hero">
+    <canvas class="sim" data-sim="vicsek" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">θᵢ(t+Δt) = ⟨θⱼ⟩<sub>|rᵢ−rⱼ|&lt;R</sub> + η ξᵢ</span>
+      <h1><em>Gallery</em></h1>
+      <p class="lede">People who move together, as in the Vicsek model of flocking above.</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · Vicsek flocking</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <section>
+      <div class="sec-h"><span class="n">01</span><h2>Some of my sketches</h2></div>
+      <div class="sketches">
+        <button data-lb="gallery-01.jpg" data-cap="Sketch"><img src="gallery-01.jpg" alt="Pencil sketch of a face with tongue out" loading="lazy"></button>
+        <button data-lb="gallery-02.jpg" data-cap="Sketch"><img src="gallery-02.jpg" alt="Pencil sketch portrait of a man" loading="lazy"></button>
+        <button data-lb="gallery-03.jpg" data-cap="Sketch"><img src="gallery-03.jpg" alt="Pencil sketch of a masked figure" loading="lazy"></button>
+      </div>
+    </section>
+    <section>
+      <div class="sec-h"><span class="n">02</span><h2>People and places</h2></div>
+      <div class="masonry" id="masonry"></div>
+    </section>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section class="page" id="page-contact" data-name="contact">
+  <header class="hero">
+    <canvas class="sim" data-sim="dwell" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <span class="eq">dx = −V′(x) dt + √(2T) dW &nbsp;·&nbsp; V(x) = x⁴/4 − x²/2</span>
+      <h1>Contact <em>Me</em></h1>
+      <p class="lede">Noise lets particles hop between the two wells. Write to me and I will hop back.</p>
+    </div>
+    <div class="simbar"><span class="tag"><i></i>live · Langevin particles in a double well</span><button class="btn-icon" data-pause>Pause</button></div>
+  </header>
+  <div class="wrap">
+    <div class="contact">
+      <div class="ct"><div class="k">Current Address</div><address>18 Sexton Street, Watertown,<br>Massachusetts, USA, 02472</address></div>
+      <div class="ct"><div class="k">Permanent Address</div><address>1 no cabin road, Golghar, Jagaddal,<br>North 24 Parganas, West Bengal, PIN 743125</address></div>
+      <div class="ct" style="grid-column:1/-1"><div class="k">E-mail</div>
+        <div class="mails">
+          <div class="mail"><a href="mailto:arupb2701@gmail.com">arupb2701@gmail.com</a><button data-copy="arupb2701@gmail.com">Copy</button></div>
+          <div class="mail"><a href="mailto:arupb@imsc.res.in">arupb@imsc.res.in</a><button data-copy="arupb@imsc.res.in">Copy</button></div>
+          <div class="mail"><a href="mailto:arup_biswas@seas.harvard.edu">arup_biswas@seas.harvard.edu</a><button data-copy="arup_biswas@seas.harvard.edu">Copy</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="in"><span>© Arup Biswas</span><span class="mono">All simulations run live in your browser · stochastic, so no two visits look the same</span></div></footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="btn-icon x" id="lb-close">Close</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</div>
+
+<script>
+(function(){
+"use strict";
+const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TAU = Math.PI*2;
+let spare=null;
+function gauss(){ if(spare!==null){const s=spare;spare=null;return s;} let u=0,v=0; while(u===0)u=Math.random(); v=Math.random(); const m=Math.sqrt(-2*Math.log(u)); spare=m*Math.sin(TAU*v); return m*Math.cos(TAU*v); }
+function css(name){ return getComputedStyle(document.body).getPropertyValue(name).trim(); }
+function hexA(hex,a){ const h=hex.replace('#',''); const n=parseInt(h.length===3?h.split('').map(c=>c+c).join(''):h,16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; }
+const BG='#0a0e18';
+
+/* ---------- canvas helper ---------- */
+function fit(canvas){ const dpr=Math.min(window.devicePixelRatio||1,2); const r=canvas.getBoundingClientRect(); const w=Math.max(1,Math.round(r.width)), h=Math.max(1,Math.round(r.height)); if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);} const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); return {ctx,w,h}; }
+
+/* ======================= SIMULATIONS ======================= */
+const SIMS={};
+
+/* Active Brownian particles with cursor repulsion */
+SIMS.abp=function(cv){
+  let P=[],w,h,ctx; const ptr={x:-1e4,y:-1e4};
+  const v0=70, Dr=0.9, Dt=6;
+  function init(){ ({ctx,w,h}=fit(cv)); const N=Math.round(Math.min(320,Math.max(110,w*h/4200))); P=[]; for(let i=0;i<N;i++){const x=Math.random()*w,y=Math.random()*h; P.push({x,y,px:x,py:y,th:Math.random()*TAU});} ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); }
+  cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect(); ptr.x=e.clientX-r.left; ptr.y=e.clientY-r.top;});
+  cv.parentElement.addEventListener('pointerleave',()=>{ptr.x=ptr.y=-1e4;});
+  function step(dt){ const sr=Math.sqrt(2*Dr*dt), st=Math.sqrt(2*Dt*dt);
+    for(const p of P){ p.px=p.x;p.py=p.y; p.th+=sr*gauss(); let fx=0,fy=0; const dx=p.x-ptr.x,dy=p.y-ptr.y,d2=dx*dx+dy*dy; if(d2<140*140&&d2>1){const d=Math.sqrt(d2), f=9000/(d2+400); fx=f*dx/d; fy=f*dy/d;}
+      p.x+=(v0*Math.cos(p.th)+fx)*dt+st*gauss(); p.y+=(v0*Math.sin(p.th)+fy)*dt+st*gauss();
+      if(p.x<0){p.x+=w;p.px=p.x;} else if(p.x>w){p.x-=w;p.px=p.x;} if(p.y<0){p.y+=h;p.py=p.y;} else if(p.y>h){p.y-=h;p.py=p.y;} } }
+  function draw(){ ctx.fillStyle='rgba(10,14,24,0.085)'; ctx.fillRect(0,0,w,h); ctx.lineWidth=2.2; ctx.lineCap='round';
+    for(const p of P){ const c=Math.cos(p.th); ctx.strokeStyle=`hsl(${28+30*c},95%,${58+10*Math.sin(p.th)}%)`; ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke(); }
+    ctx.fillStyle='#fff3e0'; for(const p of P){ ctx.fillRect(p.x-1,p.y-1,2,2); } }
+  return {init,step,draw,sub:2};
+};
+
+/* Lorenz attractor ensemble */
+SIMS.lorenz=function(cv){
+  let ctx,w,h,P=[],t=0; const s=10,rho=28,b=8/3;
+  function seed(){ P=[]; const x0=1+Math.random(),y0=1,z0=20; for(let i=0;i<220;i++){P.push({x:x0+1e-3*gauss(),y:y0+1e-3*gauss(),z:z0+1e-3*gauss(),px:null,py:null});} t=0; }
+  function init(){ ({ctx,w,h}=fit(cv)); ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); seed(); }
+  function proj(p){ const sc=Math.min(w/70,h/56); const cx=w*0.7; return [cx+p.x*sc*1.05, h*0.96-p.z*sc]; }
+  function step(dt){ t+=dt; const n=8, hh=0.0045; for(const p of P){ for(let k=0;k<n;k++){ const dx=s*(p.y-p.x), dy=p.x*(rho-p.z)-p.y, dz=p.x*p.y-b*p.z; p.x+=dx*hh; p.y+=dy*hh; p.z+=dz*hh; } } if(t>32){ seed(); ctx.fillStyle='rgba(10,14,24,0.6)'; ctx.fillRect(0,0,w,h);} }
+  function draw(){ ctx.fillStyle='rgba(10,14,24,0.045)'; ctx.fillRect(0,0,w,h); ctx.lineWidth=1.4;
+    P.forEach((p,i)=>{ const [X,Y]=proj(p); if(p.px!==null){ ctx.strokeStyle=`hsla(${250+i*0.35},90%,${70+(i%3)*6}%,0.9)`; ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(X,Y); ctx.stroke(); } p.px=X;p.py=Y; }); }
+  return {init,step,draw,sub:1};
+};
+
+/* Resetting traces x(t) */
+SIMS.traces=function(cv){
+  let ctx,w,h,W=[]; const D=1.2, r=0.35, dt=0.02, cols=['#ff7a66','#ffb07a','#ffd36b','#ff8fb6','#ffe3d9','#f5a83c'];
+  function init(){ ({ctx,w,h}=fit(cv)); const n=Math.ceil(w/2)+2; W=cols.map(c=>({c,x:0,hist:new Float32Array(n).fill(NaN),rs:new Uint8Array(n),head:0})); for(let k=0;k<n;k++) step(); }
+  function step(){ for(const q of W){ let reset=0; if(Math.random()<r*dt){q.x=0;reset=1;} else q.x+=Math.sqrt(2*D*dt)*gauss(); q.hist[q.head]=q.x; q.rs[q.head]=reset; q.head=(q.head+1)%q.hist.length; } }
+  function draw(){ ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); const mid=h*0.5, sc=h/15;
+    ctx.strokeStyle='rgba(255,122,102,0.35)'; ctx.setLineDash([4,6]); ctx.beginPath(); ctx.moveTo(0,mid); ctx.lineTo(w,mid); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font='12px "IBM Plex Mono", monospace'; ctx.fillStyle='rgba(255,122,102,0.8)'; ctx.fillText('x₀',w-28,mid-8);
+    for(const q of W){ const n=q.hist.length; ctx.strokeStyle=q.c; ctx.globalAlpha=0.8; ctx.lineWidth=1.4; ctx.beginPath(); let started=false;
+      for(let k=0;k<n;k++){ const idx=(q.head+k)%n; const v=q.hist[idx]; if(isNaN(v)) {started=false;continue;} const X=k*2, Y=mid-v*sc; if(!started||q.rs[idx]){ if(q.rs[idx]&&started){ ctx.lineTo(X,Y);} else ctx.moveTo(X,Y); started=true;} else ctx.lineTo(X,Y); }
+      ctx.stroke(); ctx.globalAlpha=1;
+      const last=q.hist[(q.head-1+n)%n]; ctx.fillStyle=q.c; ctx.beginPath(); ctx.arc((n-1)*2,mid-last*sc,3.5,0,TAU); ctx.fill(); } }
+  return {init,step:()=>{step();},draw,sub:2,fixed:true};
+};
+
+/* Diffusive spreading fan */
+SIMS.spread=function(cv){
+  let ctx,w,h,N=140,X=[],t=0,x0,y0; const D=1, dt=1, sc=1.6;
+  function reset(){ ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); X=new Float32Array(N); t=0; }
+  function init(){ ({ctx,w,h}=fit(cv)); x0=w*0.08; y0=h*0.5; reset(); }
+  function step(){ if(x0+t>w*0.98){ ctx.fillStyle='rgba(10,14,24,0.08)'; ctx.fillRect(0,0,w,h); if(t>w*1.15) reset(); else t+=1; return; }
+    ctx.lineWidth=1; for(let i=0;i<N;i++){ const a=X[i]; X[i]+=Math.sqrt(2*D*dt)*gauss()*sc; ctx.strokeStyle=`hsla(${195+(i%20)},90%,${55+(i%5)*6}%,0.32)`; ctx.beginPath(); ctx.moveTo(x0+t,y0+a); ctx.lineTo(x0+t+1,y0+X[i]); ctx.stroke(); }
+    const e0=2*Math.sqrt(2*D*t)*sc, e1=2*Math.sqrt(2*D*(t+1))*sc; ctx.strokeStyle='#5cc6ff'; ctx.lineWidth=2.2; ctx.beginPath(); ctx.moveTo(x0+t,y0-e0); ctx.lineTo(x0+t+1,y0-e1); ctx.moveTo(x0+t,y0+e0); ctx.lineTo(x0+t+1,y0+e1); ctx.stroke(); t+=1; }
+  function draw(){ ctx.fillStyle='#e8ecf5'; ctx.beginPath(); ctx.arc(x0,y0,3.5,0,TAU); ctx.fill(); }
+  return {init,step:()=>step(),draw,sub:3,fixed:true};
+};
+
+/* Galton board */
+SIMS.galton=function(cv){
+  let ctx,w,h,rows=12,balls=[],bins,sp,top,left,cx; let spawnAcc=0;
+  function init(){ ({ctx,w,h}=fit(cv)); sp=Math.min(22,h/(rows+10)); cx=w>900?w*0.8:w*0.7; top=h*0.07; bins=new Array(rows+1).fill(0); balls=[]; }
+  function pegX(row,k){ return cx+(k-row/2)*sp*1.2; }
+  function step(dt){ spawnAcc+=dt*14; while(spawnAcc>1){ spawnAcc-=1; balls.push({row:0,k:0,f:0,dir:Math.random()<.5?0:1}); }
+    for(const b of balls){ b.f+=dt*5.5; while(b.f>=1&&b.row<rows){ b.f-=1; b.k+=b.dir; b.row++; b.dir=Math.random()<.5?0:1; } if(b.row>=rows&&!b.done){ b.done=true; bins[b.k]++; } }
+    balls=balls.filter(b=>!b.done); const mx=Math.max(...bins); if(mx*3.2>h*0.38) bins=bins.map(v=>Math.floor(v*0.6)); }
+  function draw(){ ctx.fillStyle=BG; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(232,236,245,0.35)'; for(let r=0;r<rows;r++) for(let k=0;k<=r;k++){ ctx.beginPath(); ctx.arc(pegX(r,k),top+r*sp,2.2,0,TAU); ctx.fill(); }
+    const base=h*0.86, bw=sp*1.2; const total=bins.reduce((a,b)=>a+b,0);
+    for(let k=0;k<=rows;k++){ const x=pegX(rows,k), bh=bins[k]*3.2; ctx.fillStyle='rgba(255,211,107,0.85)'; ctx.fillRect(x-bw*0.42,base-bh,bw*0.84,bh); }
+    if(total>20){ const mu=rows/2, sd=Math.sqrt(rows/4); ctx.strokeStyle='#e8ecf5'; ctx.lineWidth=2; ctx.beginPath(); for(let i=0;i<=120;i++){ const k=-1+i*(rows+2)/120; const y=total*Math.exp(-(k-mu)*(k-mu)/(2*sd*sd))/(sd*Math.sqrt(TAU)); const X=pegX(rows,k), Y=base-y*3.2; i?ctx.lineTo(X,Y):ctx.moveTo(X,Y);} ctx.stroke(); }
+    ctx.fillStyle='#ffd36b'; for(const b of balls){ const r0=b.row, x1=pegX(r0,b.k), x2=pegX(r0+1,b.k+b.dir); const f=Math.min(b.f,1); const X=x1+(x2-x1)*f, Y=top+(r0+f)*sp-Math.sin(Math.PI*f)*sp*0.45; ctx.beginPath(); ctx.arc(X,Y-4,3.6,0,TAU); ctx.fill(); } }
+  return {init,step,draw,sub:1};
+};
+
+/* 2D Ising, Metropolis */
+SIMS.ising=function(cv){
+  let ctx,w,h,Lx,Ly,S,img,off,octx,T=2.27,p4,p8; const sl=document.getElementById('s-T'), out=document.getElementById('o-T'), mo=document.getElementById('ising-m');
+  function setT(v){ T=v; p4=Math.exp(-4/T); p8=Math.exp(-8/T); if(out) out.textContent=T.toFixed(2); }
+  if(sl){ sl.addEventListener('input',()=>setT(+sl.value)); }
+  function init(){ ({ctx,w,h}=fit(cv)); const cell=Math.max(4,Math.round(Math.sqrt(w*h/16000))); Lx=Math.ceil(w/cell); Ly=Math.ceil(h/cell); S=new Int8Array(Lx*Ly); for(let i=0;i<S.length;i++) S[i]=Math.random()<.5?1:-1; off=document.createElement('canvas'); off.width=Lx; off.height=Ly; octx=off.getContext('2d'); img=octx.createImageData(Lx,Ly); setT(sl?+sl.value:2.27); }
+  function sweep(){ const N=Lx*Ly; for(let n=0;n<N;n++){ const i=(Math.random()*Lx)|0, j=(Math.random()*Ly)|0, k=j*Lx+i; const s=S[k]; const nb=S[j*Lx+(i+1)%Lx]+S[j*Lx+(i-1+Lx)%Lx]+S[((j+1)%Ly)*Lx+i]+S[((j-1+Ly)%Ly)*Lx+i]; const dE=2*s*nb; if(dE<=0||(dE===4&&Math.random()<p4)||(dE===8&&Math.random()<p8)) S[k]=-s; } }
+  function draw(){ const d=img.data; let m=0; for(let k=0;k<S.length;k++){ const o=k*4; m+=S[k]; if(S[k]>0){d[o]=111;d[o+1]=227;d[o+2]=193;} else {d[o]=18;d[o+1]=26;d[o+2]=43;} d[o+3]=255; } octx.putImageData(img,0,0); ctx.imageSmoothingEnabled=false; ctx.drawImage(off,0,0,Lx*(w/Lx),Ly*(h/Ly)); if(mo) mo.textContent='magnetisation m = '+(m/S.length).toFixed(3)+'   ·   lattice '+Lx+'×'+Ly; }
+  return {init,step:()=>sweep(),draw,sub:1,fixed:true};
+};
+
+/* Vicsek flocking */
+SIMS.vicsek=function(cv){
+  let ctx,w,h,P=[]; const v=80,R=42,eta=0.45;
+  function init(){ ({ctx,w,h}=fit(cv)); const N=Math.round(Math.min(300,Math.max(120,w*h/3800))); P=[]; for(let i=0;i<N;i++) P.push({x:Math.random()*w,y:Math.random()*h,th:Math.random()*TAU}); ctx.fillStyle=BG; ctx.fillRect(0,0,w,h); }
+  function step(dt){ const R2=R*R, n=P.length, nth=new Float32Array(n);
+    for(let i=0;i<n;i++){ let sx=0,sy=0; const a=P[i]; for(let j=0;j<n;j++){ const b=P[j]; let dx=b.x-a.x, dy=b.y-a.y; if(dx>w/2)dx-=w; else if(dx<-w/2)dx+=w; if(dy>h/2)dy-=h; else if(dy<-h/2)dy+=h; if(dx*dx+dy*dy<R2){sx+=Math.cos(b.th);sy+=Math.sin(b.th);} } nth[i]=Math.atan2(sy,sx)+eta*(Math.random()-.5)*TAU*dt*3; }
+    for(let i=0;i<n;i++){ const p=P[i]; p.th=nth[i]; p.x=(p.x+v*Math.cos(p.th)*dt+w)%w; p.y=(p.y+v*Math.sin(p.th)*dt+h)%h; } }
+  function draw(){ ctx.fillStyle='rgba(10,14,24,0.25)'; ctx.fillRect(0,0,w,h);
+    for(const p of P){ const c=Math.cos(p.th), s=Math.sin(p.th); ctx.fillStyle=`hsl(${335+25*Math.cos(p.th)},95%,${70+10*s}%)`; ctx.beginPath(); ctx.moveTo(p.x+c*8,p.y+s*8); ctx.lineTo(p.x-c*5-s*3.5,p.y-s*5+c*3.5); ctx.lineTo(p.x-c*5+s*3.5,p.y-s*5-c*3.5); ctx.closePath(); ctx.fill(); } }
+  return {init,step,draw,sub:1};
+};
+
+/* Double-well Langevin */
+SIMS.dwell=function(cv){
+  let ctx,w,h,X=[],H; const T=0.16, xm=1.85, NB=60;
+  const V=x=>x*x*x*x/4-x*x/2;
+  function init(){ ({ctx,w,h}=fit(cv)); X=new Float32Array(260); for(let i=0;i<X.length;i++) X[i]=(Math.random()<.5?-1:1)+0.2*gauss(); H=new Float32Array(NB); }
+  function sx(x){ return (w>900?w*0.5:w*0.06)+(x+xm)/(2*xm)*(w>900?w*0.46:w*0.88); }
+  function sy(v){ return h*0.28+(v+0.25)/(V(xm)+0.25)*h*0.5*(-1)+h*0.5; }
+  function step(dt){ const d=Math.min(dt,0.03)*2.2; for(let i=0;i<X.length;i++){ const x=X[i]; X[i]=x-(x*x*x-x)*d+Math.sqrt(2*T*d)*gauss(); if(X[i]>xm)X[i]=xm; if(X[i]<-xm)X[i]=-xm; const b=Math.min(NB-1,Math.max(0,Math.floor((X[i]+xm)/(2*xm)*NB))); H[b]+=1; } for(let b=0;b<NB;b++) H[b]*=0.985; }
+  function draw(){ ctx.fillStyle=BG; ctx.fillRect(0,0,w,h);
+    const base=h*0.88, mx=Math.max(...H)||1; for(let b=0;b<NB;b++){ const x=-xm+(b+.5)*2*xm/NB; const X1=sx(x-xm/NB), X2=sx(x+xm/NB); const bh=H[b]/mx*h*0.16; ctx.fillStyle='rgba(139,226,143,0.25)'; ctx.fillRect(X1,base-bh,X2-X1-1,bh); }
+    ctx.strokeStyle='rgba(232,236,245,0.55)'; ctx.lineWidth=2; ctx.beginPath(); for(let i=0;i<=200;i++){ const x=-xm+i*2*xm/200; const X=sx(x), Y=sy(V(x)); i?ctx.lineTo(X,Y):ctx.moveTo(X,Y);} ctx.stroke();
+    for(let i=0;i<X.length;i++){ const x=X[i]; const hop=Math.abs(x)<0.45; ctx.fillStyle=hop?'#ffffff':'rgba(139,226,143,0.9)'; ctx.beginPath(); ctx.arc(sx(x),sy(V(x))-5-((i*37)%11),hop?3.4:2.6,0,TAU); ctx.fill(); } }
+  return {init,step,draw,sub:1};
+};
+
+/* ======================= RESETTING LAB ======================= */
+function K0(x){ if(x<=0) return Infinity; if(x<=2){ const u=(x/3.75)**2; const I0=1+u*(3.5156229+u*(3.0899424+u*(1.2067492+u*(0.2659732+u*(0.0360768+u*0.0045813))))); const t=(x/2)**2; return -Math.log(x/2)*I0+(-0.57721566+t*(0.42278420+t*(0.23069756+t*(0.03488590+t*(0.00262698+t*(0.00010750+t*0.0000074)))))); } const y=2/x; return Math.exp(-x)/Math.sqrt(x)*(1.25331414+y*(-0.07832358+y*(0.02189568+y*(-0.01062446+y*(0.00587872+y*(-0.00251540+y*0.00053208)))))); }
+function Lab(){
+  const fc=document.getElementById('lab-field'), hc=document.getElementById('lab-hist'); if(!fc) return null;
+  const sD=document.getElementById('s-D'), sr=document.getElementById('s-r'), sv=document.getElementById('s-v');
+  const oD=document.getElementById('o-D'), or_=document.getElementById('o-r'), ov=document.getElementById('o-v'), st=document.getElementById('lab-stats');
+  const L=6, N=700, NB=36; let P, H=new Float32Array(NB), Htot=0, F, G, D=1, r=.5, vret=Infinity, frames=0;
+  function readUI(){ D=+sD.value; r=+sr.value; const v=+sv.value; vret=v>20?Infinity:v; oD.textContent=D.toFixed(2); or_.textContent=r.toFixed(2); ov.textContent=vret===Infinity?'instant':v.toFixed(1); }
+  [sD,sr,sv].forEach(s=>s.addEventListener('input',()=>{readUI(); H.fill(0); Htot=0; frames=0;}));
+  function init(){ F=fit(fc); G=fit(hc); P=[]; for(let i=0;i<N;i++) P.push({x:0,y:0,ret:false}); readUI(); }
+  function step(dt){ const s=Math.sqrt(2*D*dt);
+    for(const p of P){ if(p.ret){ const d=Math.hypot(p.x,p.y), m=vret*dt; if(d<=m){p.x=0;p.y=0;p.ret=false;} else {p.x-=p.x/d*m; p.y-=p.y/d*m;} continue; }
+      if(Math.random()<r*dt){ if(vret===Infinity){p.x=0;p.y=0;} else p.ret=true; continue; }
+      p.x+=s*gauss(); p.y+=s*gauss(); }
+    for(let b=0;b<NB;b++) H[b]*=0.997; Htot=Htot*0.997+P.length; for(const p of P){ const rr=Math.hypot(p.x,p.y); const b=Math.floor(rr/L*NB); if(b<NB) H[b]+=1; } frames++; }
+  function draw(){ const {ctx,w,h}=F; ctx.fillStyle='rgba(8,11,20,0.35)'; ctx.fillRect(0,0,w,h); const cx=w/2, cy=h/2, sc=Math.min(w,h)/(2*L);
+    ctx.strokeStyle='rgba(152,163,189,0.18)'; ctx.lineWidth=1; for(let k=1;k<=5;k++){ ctx.beginPath(); ctx.arc(cx,cy,k*sc,0,TAU); ctx.stroke(); }
+    let nret=0; for(const p of P){ if(p.ret) nret++; ctx.fillStyle=p.ret?'#ff7a66':'rgba(232,236,245,0.85)'; const X=cx+p.x*sc, Y=cy+p.y*sc; if(X<-4||X>w+4||Y<-4||Y>h+4) continue; ctx.fillRect(X-1.3,Y-1.3,p.ret?3.2:2.6,p.ret?3.2:2.6); }
+    ctx.fillStyle='#ff7a66'; ctx.beginPath(); ctx.arc(cx,cy,5,0,TAU); ctx.fill(); ctx.strokeStyle='rgba(255,122,102,0.5)'; ctx.beginPath(); ctx.arc(cx,cy,10,0,TAU); ctx.stroke();
+    // histogram
+    const g=G.ctx, W=G.w, Hh=G.h, padL=34, padB=26, padT=16, pw=W-padL-12, ph=Hh-padB-padT; g.fillStyle='#121a2b'; g.fillRect(0,0,W,Hh);
+    const tot=Htot||1, db=L/NB; const dens=Array.from(H,v=>v/tot/db);
+    const alpha=Math.sqrt(Math.max(r,1e-6)/D); const th=[]; let tmax=0; if(vret===Infinity&&r>0){ for(let i=0;i<=120;i++){ const x=0.02+i*(L-0.02)/120; const y=alpha*alpha*x*K0(alpha*x); th.push([x,y]); tmax=Math.max(tmax,y);} }
+    const ymax=Math.max(0.05,...dens,tmax)*1.12;
+    g.strokeStyle='rgba(152,163,189,0.25)'; g.beginPath(); g.moveTo(padL,padT); g.lineTo(padL,padT+ph); g.lineTo(padL+pw,padT+ph); g.stroke();
+    g.font='11px "IBM Plex Mono", monospace'; g.fillStyle='#98a3bd'; g.fillText('distance ρ from origin',padL+pw/2-62,Hh-6); for(let k=0;k<=L;k+=2){ const X=padL+k/L*pw; g.fillText(String(k),X-3,padT+ph+14);} g.save(); g.translate(11,padT+ph/2+30); g.rotate(-Math.PI/2); g.fillText('P(ρ)',0,0); g.restore();
+    for(let b=0;b<NB;b++){ const X=padL+b/NB*pw, bh=dens[b]/ymax*ph; g.fillStyle='rgba(255,122,102,0.75)'; g.fillRect(X+0.5,padT+ph-bh,pw/NB-1,bh); }
+    if(th.length){ g.strokeStyle='#5cc6ff'; g.lineWidth=2; g.beginPath(); th.forEach(([x,y],i)=>{ const X=padL+x/L*pw, Y=padT+ph-y/ymax*ph; i?g.lineTo(X,Y):g.moveTo(X,Y);}); g.stroke(); }
+    if(st) st.textContent=`returning: ${nret} of ${N}  ·  ${r>0?('mean time between resets 1/r = '+(1/r).toFixed(2)):'no resetting: free diffusion'}`;
+  }
+  return {init,step,draw,sub:2,cv:fc,isLab:true};
+}
+
+/* ======================= ENGINE ======================= */
+const runners=[];
+function makeRunner(cv,sim){ const R={cv,sim,running:!REDUCED,visible:false,page:cv.closest('.page'),ready:false,last:0,btn:null,tag:null};
+  const bar=cv.closest('.hero')?.querySelector('.simbar'); if(bar){ R.btn=bar.querySelector('[data-pause]'); R.tag=bar.querySelector('.tag'); if(R.btn){ R.btn.addEventListener('click',()=>{ R.running=!R.running; sync(R); }); } }
+  sync(R); runners.push(R); return R; }
+function sync(R){ if(R.btn) R.btn.textContent=R.running?'Pause':'Play'; if(R.tag) R.tag.classList.toggle('paused',!R.running); }
+function ensure(R){ if(!R.ready){ R.sim.init(); R.ready=true; if(REDUCED){ for(let i=0;i<240;i++){ R.sim.step(1/60); if(i>180) R.sim.draw(); } R.sim.draw(); } } }
+document.querySelectorAll('canvas.sim').forEach(cv=>{ const f=SIMS[cv.dataset.sim]; if(f) makeRunner(cv,f(cv)); });
+const lab=Lab(); if(lab){ makeRunner(lab.cv,lab); }
+const io='IntersectionObserver' in window? new IntersectionObserver(es=>es.forEach(e=>{ const R=runners.find(x=>x.cv===e.target); if(R) R.visible=e.isIntersecting; }),{threshold:0.02}) : null;
+runners.forEach(R=>{ if(io) io.observe(R.cv); else R.visible=true; });
+function frame(ts){ for(const R of runners){ if(!R.page.classList.contains('active')||!R.visible) continue; ensure(R); if(!R.running) continue; const dt=Math.min(0.05,R.last?(ts-R.last)/1000:1/60); R.last=ts; const sub=R.sim.sub||1; for(let k=0;k<sub;k++) R.sim.step(R.sim.fixed?undefined:dt/sub); R.sim.draw(); } requestAnimationFrame(frame); }
+requestAnimationFrame(frame);
+let rz; window.addEventListener('resize',()=>{ clearTimeout(rz); rz=setTimeout(()=>{ runners.forEach(R=>{ if(R.ready){ R.sim.init(); if(!R.running) R.sim.draw(); } }); },180); });
+
+/* ======================= ROUTER ======================= */
+const pages=['home','about','research','academics','awards','archive','gallery','contact'];
+function route(){ let n=(location.hash||'#home').slice(1); if(!pages.includes(n)) n='home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.name===n));
+  document.body.dataset.page=n;
+  document.querySelectorAll('.links a').forEach(a=>{ if(a.getAttribute('href')==='#'+n) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  const act=document.querySelector('.links a[aria-current]'); if(act&&act.scrollIntoView) act.scrollIntoView({block:'nearest',inline:'center'});
+  runners.forEach(R=>{ R.last=0; if(R.page.classList.contains('active')&&R.ready){ R.sim.init(); } });
+  window.scrollTo(0,0); }
+window.addEventListener('hashchange',route); route();
+
+/* ======================= GALLERY ======================= */
+const photos=[
+ ['gallery-04',"Maha's group with the Director of Concord Field Station, Harvard, Prof. Andrew Biewener"],
+ ['gallery-05',"At the iconic Harvard yard"],
+ ['gallery-06',"With group members from Maha's lab at Harvard"],
+ ['gallery-07',"With (Late) Sir R. Chidambaram (spearhead of nuclear power of India) and Sir V. Ravindran (Director of IMSc)"],
+ ['gallery-08',"With my PhD guide cum senior Arnab (the middle) and other colleagues."],
+ ['gallery-09',"My Mother (Maa), to whom I owe my entire life and its values."],
+ ['gallery-10',"The most precious gift that I got from the world - my wife ;)"],
+ ['gallery-11',"Partner in crime from my mess at Jadavpur"],
+ ['gallery-12',"This poor guys are my batchmates from IMSc"],
+ ['gallery-13',"Jadavpur batchmates - Indian Govt is in unsafe hands of some of these guys."],
+ ['gallery-14',"Institute trip to Ooty (2022)"],
+ ['gallery-15',"Institute trip to Chikmagalur (2023)"],
+ ['gallery-16',"Institute trip to Munnar (2025)"],
+ ['gallery-17',"A random click"],
+ ['gallery-18',"Tree plantation at Republic day at IMSc"],
+ ['gallery-19',"My lovely pets (one of them is no more but not from my heart)"],
+ ['gallery-20',"Science at the Sabha @IMSc"],
+ ['gallery-21',"Short trip to Mysore with guys from Bangalore school of statistical physics 2023"],
+ ['gallery-22',"Open day @IMSc"]
+];
+const ms=document.getElementById('masonry');
+if(ms){ ms.innerHTML=photos.map(([f,c])=>`<figure class="ph"><button data-lb="${f}.jpg" data-cap="${c.replace(/"/g,'&quot;')}"><img src="${f}.jpg" alt="${c.replace(/"/g,'&quot;')}" loading="lazy"></button><figcaption>${c}</figcaption></figure>`).join(''); }
+const lb=document.getElementById('lightbox'), lbi=document.getElementById('lb-img'), lbc=document.getElementById('lb-cap'); let lastFocus=null;
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-lb]'); if(b){ lastFocus=b; lbi.src=b.dataset.lb; lbi.alt=b.dataset.cap||''; lbc.textContent=b.dataset.cap||''; lb.classList.add('open'); document.getElementById('lb-close').focus(); } });
+function closeLb(){ lb.classList.remove('open'); if(lastFocus) lastFocus.focus(); }
+document.getElementById('lb-close').addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&lb.classList.contains('open')) closeLb(); });
+
+/* ======================= COPY ======================= */
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{ try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied'; } catch(err){ b.textContent='Select & copy'; } setTimeout(()=>b.textContent='Copy',1600); }));
+})();
+</script>
+</body>
+</html>
