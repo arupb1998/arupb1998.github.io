@@ -82,6 +82,7 @@ h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
     <header>
       <h1>Site statistics<small id="rangeLabel"></small></h1>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="./">← Back to website</a>
         <a class="btn" href="https://arup.goatcounter.com" target="_blank" rel="noopener">Full GoatCounter dashboard ↗</a>
         <button class="btn" id="lockBtn" title="Remove the key from this browser">Lock &amp; forget key</button>
       </div>
@@ -144,7 +145,23 @@ h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
   }
   function q(r,extra){ return '?start='+encodeURIComponent(r.start.toISOString().replace('.000',''))+'&end='+encodeURIComponent(r.end.toISOString().replace('.000',''))+(extra||''); }
 
+  // GoatCounter allows at most 4 API requests per second, so requests are queued ~350 ms apart
+  // and retried after a pause if one is refused (a refusal arrives without CORS headers, as a network error).
+  var queue=Promise.resolve(), lastAt=0;
   function get(path){
+    var p=queue.then(function(){ var wait=Math.max(0,lastAt+350-Date.now()); return new Promise(function(r){ setTimeout(r,wait); }); })
+      .then(function(){ lastAt=Date.now(); return attempt(path,0); });
+    queue=p.catch(function(){});
+    return p;
+  }
+  function attempt(path,n){
+    return fetchOnce(path).catch(function(e){
+      if(e && e.code) throw e;
+      if(n<3) return new Promise(function(r){ setTimeout(r,1200*(n+1)); }).then(function(){ lastAt=Date.now(); return attempt(path,n+1); });
+      throw e;
+    });
+  }
+  function fetchOnce(path){
     return fetch(API+path,{headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},cache:'no-store'}).then(function(r){
       if(r.status===401){ var e=new Error('The key was not accepted. Check that it was copied completely.'); e.code=401; throw e; }
       if(r.status===403){ var e2=new Error('This key does not have the "Read statistics" permission.'); e2.code=403; throw e2; }
