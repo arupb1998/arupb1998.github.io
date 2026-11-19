@@ -172,7 +172,7 @@ h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
   }
 
   function list(id,items,opts){
-    opts=opts||{}; var el=$(id); el.innerHTML='';
+    opts=opts||{}; var el=$(id); el.innerHTML=''; items=(items||[]).filter(function(i){return (i.count||0)>0;});
     if(!items||!items.length){ el.innerHTML='<li class="empty" style="display:block">'+(opts.empty||'No data in this range yet.')+'</li>'; return; }
     var total=items.reduce(function(a,b){return a+(b.count||0);},0)||1, max=Math.max.apply(null,items.map(function(i){return i.count||0;}))||1;
     items.slice(0,opts.limit||12).forEach(function(it){
@@ -229,13 +229,13 @@ h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
 
   var busy=false;
   function refresh(){
-    if(busy) return; busy=true; $('derr').textContent='';
+    if(busy) return; busy=true; $('derr').style.color='var(--muted)'; $('derr').textContent='Loading the latest numbers…';
     var r=range(), rq=q(r), fmtD=function(d){return d.toISOString().slice(0,10);};
     $('rangeLabel').textContent=(days===1?'Last 24 hours':'Last '+days+' days')+' · '+fmtD(r.start)+' to '+fmtD(new Date(r.end.getTime()-1))+' (UTC)';
     var pages=['locations','toprefs','browsers','systems','sizes','languages','campaigns'];
     Promise.all([get('/stats/total'+rq), get('/stats/hits'+q(r,'&limit=50'))].concat(pages.map(function(p){return get('/stats/'+p+q(r,'&limit=20')).catch(function(e){ if(e.code===401||e.code===403) throw e; return {stats:[],failed:true}; });})))
     .then(function(res){
-      var total=res[0], hits=res[1], S={}; pages.forEach(function(p,i){ S[p]=res[i+2]; });
+      $('derr').textContent=''; var total=res[0], hits=res[1], S={}; pages.forEach(function(p,i){ S[p]=res[i+2]; });
       $('tVisits').textContent=fmt(total.total); $('tVisitsS').textContent=days===1?'in the last 24 hours':'in the last '+days+' days';
       var locs=(S.locations.stats||[]).filter(function(x){return x.count>0;});
       $('tCountries').textContent=fmt(locs.length); $('tCountriesS').textContent=locs[0]?('most from '+(locs[0].name||locs[0].id)):' ';
@@ -255,7 +255,7 @@ h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
     })
     .catch(function(e){
       if(e.code===401||e.code===403){ store(KEY_NAME,null); key=null; showLock(e.message); }
-      else $('derr').textContent=(e.message==='Failed to fetch')?'Could not reach GoatCounter. Check your connection or ad blocker, then press Refresh.':e.message;
+      else { $('derr').style.color=''; $('derr').textContent=(e.message==='Failed to fetch')?'Could not reach GoatCounter. Check your connection or ad blocker, then press Refresh.':e.message; }
     })
     .then(function(){ busy=false; });
   }
