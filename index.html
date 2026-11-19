@@ -893,5 +893,20 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&vw.classList.conta
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{ try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied'; } catch(err){ b.textContent='Select & copy'; } setTimeout(()=>b.textContent='Copy',1600); }));
 })();
 </script>
+<!-- Private visitor statistics (GoatCounter: no cookies, no personal data). Each section is counted as its own page. -->
+<script data-goatcounter="https://arup.goatcounter.com/count" data-goatcounter-settings='{"no_onload":true}' async src="https://gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var last=null, waiting=false;
+  function cur(){ var p=document.querySelector('.page.active'); return '/'+((p&&p.dataset.name)||'home'); }
+  function send(tries){
+    var path=cur(); if(path===last) return;
+    if(window.goatcounter && window.goatcounter.count){ last=path; waiting=false; window.goatcounter.count({path:path, title:'Arup Biswas · '+path.slice(1)}); }
+    else if(tries<60){ waiting=true; setTimeout(function(){ send(tries+1); },250); }
+  }
+  window.addEventListener('hashchange',function(){ if(!waiting) setTimeout(function(){ send(0); },0); });
+  send(0);
+})();
+</script>
 </body>
 </html>
