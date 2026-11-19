@@ -52,6 +52,7 @@ p{margin:0}
 .links::-webkit-scrollbar{display:none}
 .links a{color:var(--muted);text-decoration:none;font-size:14px;padding:7px 11px;border-radius:999px;white-space:nowrap}
 .links a:hover{color:var(--text);background:var(--surface)}
+.links a.owner-link{border:1px dashed var(--line)}
 .links a[aria-current="page"]{color:var(--accent-ink);background:var(--accent);font-weight:500}
 
 /* ---------- hero plate ---------- */
@@ -284,6 +285,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
       <a href="#archive">Archive</a>
       <a href="#gallery">Gallery</a>
       <a href="#contact">Contact Me</a>
+      <a href="stats.html" class="owner-link" hidden title="Private: visible only in your browser">Stats</a>
     </div>
   </div>
 </nav>
@@ -646,7 +648,7 @@ footer .mono{font-family:var(--mono);font-size:12px}
 
 </main>
 
-<footer><div class="in"><span>© Arup Biswas</span><span class="mono">Every animation on this site is a live simulation running in your browser, so no two visits look exactly the same</span></div></footer>
+<footer><div class="in"><span id="ownerTap">© Arup Biswas</span><span class="mono">Every animation on this site is a live simulation running in your browser, so no two visits look exactly the same</span></div></footer>
 
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title">
   <div class="vbox">
@@ -891,6 +893,15 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&vw.classList.conta
 
 /* ======================= COPY ======================= */
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{ try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied'; } catch(err){ b.textContent='Select & copy'; } setTimeout(()=>b.textContent='Copy',1600); }));
+})();
+</script>
+<script>
+/* Owner-only "Stats" link: shown only in a browser where the private stats page has been unlocked.
+   On a new device, click "© Arup Biswas" in the footer 5 times quickly to reach the stats page. */
+(function(){
+  try{ if(localStorage.getItem('gc_stats_key')){ var a=document.querySelector('.owner-link'); if(a) a.hidden=false; } }catch(e){}
+  var t=[], el=document.getElementById('ownerTap');
+  if(el) el.addEventListener('click',function(){ var now=Date.now(); t=t.filter(function(x){return now-x<3000;}); t.push(now); if(t.length>=5){ location.href='stats.html'; } });
 })();
 </script>
 <!-- Private visitor statistics (GoatCounter: no cookies, no personal data). Each section is counted as its own page. -->
