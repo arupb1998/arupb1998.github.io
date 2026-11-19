@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Site statistics · private</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e18;--surface:#121a2b;--line:#26324d;--grid:#1b2438;--text:#e8ecf5;--muted:#98a3bd;--accent:#5cc6ff;--warn:#ffb4a8;
+  --display:"Source Serif 4",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.5}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:22px}
+h1{font-family:var(--display);font-weight:600;font-size:30px;margin:0}
+h1 small{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400;margin-top:4px}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+.btn.on{background:var(--accent);color:#06131d;border-color:var(--accent)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px}
+.filters .lab{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:4px}
+.filters .sp{flex:1}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.tile .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--display);font-size:34px;font-weight:600;line-height:1.15;margin-top:6px;overflow-wrap:anywhere}
+.tile .s{font-size:12.5px;color:var(--muted)}
+h2{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 12px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:220px;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:#0d1322;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12.5px;white-space:nowrap;opacity:0;transition:opacity .1s;transform:translate(-50%,-110%)}
+.tip b{font-family:var(--mono);font-weight:500}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:6px 0;border-top:1px solid var(--grid)}
+.list li:first-child{border-top:0}
+.list .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list .ct{font-family:var(--mono);font-size:13px;color:var(--text);text-align:right}
+.list .ct span{color:var(--muted);margin-left:8px}
+.list .bar{grid-column:1/-1;height:6px;background:var(--grid);border-radius:4px;overflow:hidden}
+.list .bar i{display:block;height:100%;background:var(--accent);border-radius:0 4px 4px 0}
+.empty{color:var(--muted);font-size:13.5px;padding:6px 0}
+.more{margin-top:8px}
+.lock{max-width:520px;margin:9vh auto 0}
+.lock h1{margin-bottom:10px}
+.lock p{color:#cdd4e4}
+.lock ol{color:#cdd4e4;padding-left:20px}
+.lock input{width:100%;font:inherit;font-family:var(--mono);font-size:14px;color:var(--text);background:#0d1322;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+.lock input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.err{color:var(--warn);font-size:13.5px;min-height:1.4em}
+.note{font-size:12.5px;color:var(--muted);margin-top:18px}
+.hidden{display:none!important}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Locked view: shown until a valid read-only GoatCounter API key is entered on this device -->
+  <section id="lock" class="lock card">
+    <h1>Site statistics</h1>
+    <p>This page is private. It holds no data itself: it loads visitor statistics for <b>arupb1998.github.io</b> from GoatCounter only after the owner's API key is entered. The key is kept in this browser alone.</p>
+    <label for="key" class="lab" style="font-family:var(--mono);font-size:12px;color:var(--muted)">GoatCounter API key</label>
+    <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your API key">
+    <div class="err" id="err"></div>
+    <button class="btn on" id="unlock">Unlock</button>
+    <details class="note"><summary>How to get a key</summary>
+      <ol>
+        <li>Log in at <a href="https://arup.goatcounter.com" target="_blank" rel="noopener">arup.goatcounter.com</a>.</li>
+        <li>Click your user name (top right), then <b>API</b>.</li>
+        <li>Create a new key with only the <b>Read statistics</b> permission ticked, and paste it here.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- Dashboard view -->
+  <section id="dash" class="hidden">
+    <header>
+      <h1>Site statistics<small id="rangeLabel"></small></h1>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="https://arup.goatcounter.com" target="_blank" rel="noopener">Full GoatCounter dashboard ↗</a>
+        <button class="btn" id="lockBtn" title="Remove the key from this browser">Lock &amp; forget key</button>
+      </div>
+    </header>
+
+    <div class="filters" role="group" aria-label="Time range">
+      <span class="lab">Range</span>
+      <button class="btn" data-r="1">24 hours</button>
+      <button class="btn on" data-r="7">7 days</button>
+      <button class="btn" data-r="30">30 days</button>
+      <button class="btn" data-r="90">90 days</button>
+      <button class="btn" data-r="365">1 year</button>
+      <span class="sp"></span>
+      <button class="btn" id="refresh">Refresh</button>
+    </div>
+
+    <div class="err" id="derr"></div>
+
+    <div class="tiles">
+      <div class="card tile"><div class="k">Visits</div><div class="v" id="tVisits">–</div><div class="s" id="tVisitsS">&nbsp;</div></div>
+      <div class="card tile"><div class="k">Countries</div><div class="v" id="tCountries">–</div><div class="s" id="tCountriesS">&nbsp;</div></div>
+      <div class="card tile"><div class="k">Most-viewed section</div><div class="v" id="tTop" style="font-size:26px">–</div><div class="s" id="tTopS">&nbsp;</div></div>
+      <div class="card tile"><div class="k">Top source</div><div class="v" id="tRef" style="font-size:22px">–</div><div class="s" id="tRefS">&nbsp;</div></div>
+    </div>
+
+    <div class="card">
+      <h2 id="chartTitle">Visits per day</h2>
+      <div class="chart" id="chart"><svg id="svg" role="img" aria-label="Visits over time"></svg><div class="tip" id="tip"></div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><h2>Sections viewed</h2><ul class="list" id="lPages"></ul></div>
+      <div class="card"><h2>Countries</h2><ul class="list" id="lLocations"></ul></div>
+      <div class="card"><h2>Where visitors came from</h2><ul class="list" id="lToprefs"></ul></div>
+      <div class="card"><h2>Browsers</h2><ul class="list" id="lBrowsers"></ul></div>
+      <div class="card"><h2>Operating systems</h2><ul class="list" id="lSystems"></ul></div>
+      <div class="card"><h2>Screen sizes</h2><ul class="list" id="lSizes"></ul></div>
+      <div class="card"><h2>Languages</h2><ul class="list" id="lLanguages"></ul></div>
+      <div class="card"><h2>Campaigns</h2><ul class="list" id="lCampaigns"></ul></div>
+    </div>
+    <p class="note">Counts are visits as GoatCounter defines them (one person viewing a section within a session counts once). GoatCounter stores no names, IP addresses or cookies, so individual visitors cannot be identified. Times are in UTC.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  var API='https://arup.goatcounter.com/api/v0', KEY_NAME='gc_stats_key', key=null, days=7;
+  var $=function(id){return document.getElementById(id);};
+  function store(k,v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} }
+  function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function fmt(n){ return (n||0).toLocaleString('en-US'); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function range(){
+    var end=new Date(); end.setUTCMinutes(0,0,0); end=new Date(end.getTime()+3600e3);
+    var start;
+    if(days===1){ start=new Date(end.getTime()-24*3600e3); }
+    else { start=new Date(end); start.setUTCHours(0); start=new Date(start.getTime()-(days-1)*86400e3); }
+    return {start:start, end:end};
+  }
+  function q(r,extra){ return '?start='+encodeURIComponent(r.start.toISOString().replace('.000',''))+'&end='+encodeURIComponent(r.end.toISOString().replace('.000',''))+(extra||''); }
+
+  function get(path){
+    return fetch(API+path,{headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},cache:'no-store'}).then(function(r){
+      if(r.status===401){ var e=new Error('The key was not accepted. Check that it was copied completely.'); e.code=401; throw e; }
+      if(r.status===403){ var e2=new Error('This key does not have the "Read statistics" permission.'); e2.code=403; throw e2; }
+      if(r.status===429){ throw new Error('GoatCounter is rate-limiting requests; wait a few seconds and press Refresh.'); }
+      if(!r.ok) throw new Error('GoatCounter returned an error ('+r.status+').');
+      return r.json();
+    });
+  }
+
+  function list(id,items,opts){
+    opts=opts||{}; var el=$(id); el.innerHTML='';
+    if(!items||!items.length){ el.innerHTML='<li class="empty" style="display:block">'+(opts.empty||'No data in this range yet.')+'</li>'; return; }
+    var total=items.reduce(function(a,b){return a+(b.count||0);},0)||1, max=Math.max.apply(null,items.map(function(i){return i.count||0;}))||1;
+    items.slice(0,opts.limit||12).forEach(function(it){
+      var li=document.createElement('li'); var pct=Math.round(100*(it.count||0)/total);
+      li.innerHTML='<span class="nm" title="'+esc(it.label)+'">'+esc(it.label)+'</span><span class="ct">'+fmt(it.count)+'<span>'+pct+'%</span></span><span class="bar"><i style="width:'+Math.max(2,100*(it.count||0)/max)+'%"></i></span>';
+      el.appendChild(li);
+    });
+  }
+
+  function sectionName(p){ var n=(p||'').replace(/^\//,''); return n? n.charAt(0).toUpperCase()+n.slice(1):'Home'; }
+  function refName(s){ var n=s.name||''; if(!n) return '(direct / unknown)'; return n; }
+  function sizeName(s){ var m={phone:'Phone',largephone:'Large phone',tablet:'Tablet',desktop:'Desktop',desktophd:'Desktop (HD)',unknown:'Unknown'}; return m[s.id]||s.name||s.id||'Unknown'; }
+
+  var series=[];
+  function drawChart(){
+    var svg=$('svg'), W=svg.clientWidth||800, H=220, pl=36, pr=8, pt=10, pb=26;
+    var n=series.length, max=Math.max(1,Math.max.apply(null,series.map(function(d){return d.v;})));
+    var step=Math.pow(10,Math.floor(Math.log10(max))), nice=Math.ceil(max/step)*step; if(nice/step>5) step*=2; if(nice<4) {nice=Math.max(4,nice); step=1;}
+    var y=function(v){return pt+(H-pt-pb)*(1-v/nice);}, bw=(W-pl-pr)/Math.max(1,n), g='';
+    for(var t=0;t<=nice+1e-9;t+=step){ g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(t)+'" y2="'+y(t)+'" stroke="#1b2438" stroke-width="1"/><text x="'+(pl-8)+'" y="'+(y(t)+4)+'" text-anchor="end" fill="#98a3bd" font-size="11" font-family="IBM Plex Mono">'+t+'</text>'; }
+    var labEvery=Math.ceil(n/(W<520?6:12));
+    series.forEach(function(d,i){
+      var x=pl+i*bw, w=Math.max(1,bw-2), h=Math.max(0,y(0)-y(d.v)), r=Math.min(4,w/2,h);
+      if(d.v>0) g+='<path d="M'+(x+1)+','+y(0)+' v'+(-(h-r))+' q0,'+(-r)+' '+r+','+(-r)+' h'+(w-2*r)+' q'+r+',0 '+r+','+r+' v'+(h-r)+' z" fill="#5cc6ff"/>';
+      g+='<rect x="'+x+'" y="'+pt+'" width="'+bw+'" height="'+(H-pt-pb)+'" fill="transparent" data-i="'+i+'"/>';
+      if(i%labEvery===0) g+='<text x="'+(x+bw/2)+'" y="'+(H-8)+'" text-anchor="middle" fill="#98a3bd" font-size="11" font-family="IBM Plex Mono">'+esc(d.short)+'</text>';
+    });
+    g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="#26324d" stroke-width="1"/>';
+    svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.innerHTML=g;
+  }
+  $('svg').addEventListener('mousemove',function(e){
+    var i=e.target.getAttribute&&e.target.getAttribute('data-i'), tip=$('tip');
+    if(i==null){ tip.style.opacity=0; return; }
+    var d=series[+i], box=$('chart').getBoundingClientRect(), r=e.target.getBoundingClientRect();
+    tip.innerHTML=esc(d.label)+' · <b>'+fmt(d.v)+'</b> visit'+(d.v===1?'':'s');
+    tip.style.left=(r.left-box.left+r.width/2)+'px'; tip.style.top=(r.top-box.top+20)+'px'; tip.style.opacity=1;
+  });
+  $('svg').addEventListener('mouseleave',function(){ $('tip').style.opacity=0; });
+  window.addEventListener('resize',function(){ if(series.length) drawChart(); });
+
+  function buildSeries(total){
+    var st=total.stats||[], out=[], M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    if(days===1){
+      var r=range(); var byHour={};
+      st.forEach(function(d){ (d.hourly||[]).forEach(function(v,h){ byHour[d.day+'T'+(h<10?'0':'')+h]=v; }); });
+      for(var t=r.start.getTime(); t<r.end.getTime(); t+=3600e3){ var dt=new Date(t), k=dt.toISOString().slice(0,13); out.push({v:byHour[k]||0, short:k.slice(11,13)+':00', label:dt.getUTCDate()+' '+M[dt.getUTCMonth()]+', '+k.slice(11,13)+':00 UTC'}); }
+      $('chartTitle').textContent='Visits per hour';
+    } else {
+      st.forEach(function(d){ var p=d.day.split('-'); out.push({v:d.daily||0, short:+p[2]+' '+M[+p[1]-1], label:+p[2]+' '+M[+p[1]-1]+' '+p[0]}); });
+      $('chartTitle').textContent='Visits per day';
+    }
+    return out;
+  }
+
+  var busy=false;
+  function refresh(){
+    if(busy) return; busy=true; $('derr').textContent='';
+    var r=range(), rq=q(r), fmtD=function(d){return d.toISOString().slice(0,10);};
+    $('rangeLabel').textContent=(days===1?'Last 24 hours':'Last '+days+' days')+' · '+fmtD(r.start)+' to '+fmtD(new Date(r.end.getTime()-1))+' (UTC)';
+    var pages=['locations','toprefs','browsers','systems','sizes','languages','campaigns'];
+    Promise.all([get('/stats/total'+rq), get('/stats/hits'+q(r,'&limit=50'))].concat(pages.map(function(p){return get('/stats/'+p+q(r,'&limit=20')).catch(function(e){ if(e.code===401||e.code===403) throw e; return {stats:[],failed:true}; });})))
+    .then(function(res){
+      var total=res[0], hits=res[1], S={}; pages.forEach(function(p,i){ S[p]=res[i+2]; });
+      $('tVisits').textContent=fmt(total.total); $('tVisitsS').textContent=days===1?'in the last 24 hours':'in the last '+days+' days';
+      var locs=(S.locations.stats||[]).filter(function(x){return x.count>0;});
+      $('tCountries').textContent=fmt(locs.length); $('tCountriesS').textContent=locs[0]?('most from '+(locs[0].name||locs[0].id)):' ';
+      var hl=(hits.hits||[]).filter(function(h){return !h.event;}).sort(function(a,b){return b.count-a.count;});
+      $('tTop').textContent=hl[0]?sectionName(hl[0].path):'–'; $('tTopS').textContent=hl[0]?fmt(hl[0].count)+' visits':' ';
+      var refs=(S.toprefs.stats||[]);
+      $('tRef').textContent=refs[0]?refName(refs[0]):'–'; $('tRefS').textContent=refs[0]?fmt(refs[0].count)+' visits':' ';
+      series=buildSeries(total); drawChart();
+      list('lPages',hl.map(function(h){return {label:sectionName(h.path),count:h.count};}));
+      list('lLocations',locs.map(function(x){return {label:x.name||x.id||'Unknown',count:x.count};}));
+      list('lToprefs',refs.map(function(x){return {label:refName(x),count:x.count};}),{empty:'No referrers yet (direct visits are not listed here).'});
+      list('lBrowsers',(S.browsers.stats||[]).map(function(x){return {label:x.name||'Unknown',count:x.count};}));
+      list('lSystems',(S.systems.stats||[]).map(function(x){return {label:x.name||'Unknown',count:x.count};}));
+      list('lSizes',(S.sizes.stats||[]).map(function(x){return {label:sizeName(x),count:x.count};}));
+      list('lLanguages',(S.languages.stats||[]).map(function(x){return {label:x.name||x.id||'Unknown',count:x.count};}),{empty:S.languages.failed?'Language collection is switched off in GoatCounter settings.':'No data in this range yet.'});
+      list('lCampaigns',(S.campaigns.stats||[]).map(function(x){return {label:x.name||'Unknown',count:x.count};}),{empty:'No campaign links used (e.g. ?utm_campaign=…).'});
+    })
+    .catch(function(e){
+      if(e.code===401||e.code===403){ store(KEY_NAME,null); key=null; showLock(e.message); }
+      else $('derr').textContent=(e.message==='Failed to fetch')?'Could not reach GoatCounter. Check your connection or ad blocker, then press Refresh.':e.message;
+    })
+    .then(function(){ busy=false; });
+  }
+
+  function showLock(msg){ $('dash').classList.add('hidden'); $('lock').classList.remove('hidden'); $('err').textContent=msg||''; $('key').value=''; }
+  function showDash(){ $('lock').classList.add('hidden'); $('dash').classList.remove('hidden'); refresh(); }
+
+  $('unlock').addEventListener('click',function(){
+    var k=$('key').value.trim(); if(!k){ $('err').textContent='Paste your API key first.'; return; }
+    $('err').textContent='Checking…'; key=k;
+    get('/stats/total'+q(range())).then(function(){ store(KEY_NAME,k); $('err').textContent=''; showDash(); })
+      .catch(function(e){ key=null; $('err').textContent=(e.message==='Failed to fetch')?'Could not reach GoatCounter. Check your connection or ad blocker.':e.message; });
+  });
+  $('key').addEventListener('keydown',function(e){ if(e.key==='Enter') $('unlock').click(); });
+  $('lockBtn').addEventListener('click',function(){ store(KEY_NAME,null); key=null; series=[]; showLock(''); });
+  $('refresh').addEventListener('click',refresh);
+  document.querySelectorAll('[data-r]').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('[data-r]').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); days=+b.getAttribute('data-r'); refresh(); }); });
+
+  key=load(KEY_NAME); if(key) showDash(); else showLock('');
+})();
+</script>
+</body>
+</html>
